@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scene/WaveChangeScreen/WaveChangeScreen.gd" type="Script" id=1]
+[ext_resource path="res://Assate/Font/Kenney Mini.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+outline_size = 2
+font_data = ExtResource( 2 )
+
+[node name="WaveChangeScreen" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 16.0
+margin_right = -16.0
+margin_bottom = -16.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="."]
+margin_right = 580.0
+margin_bottom = 328.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WaveCompletionText" type="HBoxContainer" parent="VBox"]
+margin_right = 580.0
+margin_bottom = 40.0
+
+[node name="WaveText" type="Label" parent="VBox/WaveCompletionText"]
+margin_right = 276.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.862745, 0.203922, 0.223529, 1 )
+text = "WAVE "
+align = 2
+
+[node name="WaveCount" type="Label" parent="VBox/WaveCompletionText"]
+margin_left = 280.0
+margin_right = 300.0
+margin_bottom = 40.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.533333, 0.670588, 0.0784314, 1 )
+text = "0"
+
+[node name="CompletText" type="Label" parent="VBox/WaveCompletionText"]
+margin_left = 304.0
+margin_right = 580.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.862745, 0.203922, 0.223529, 1 )
+text = " COMPLETE."

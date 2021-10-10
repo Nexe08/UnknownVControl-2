@@ -1,0 +1,51 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Scene/MainMenu/MainMenu.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scene/Game/Game.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Character/Player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scene/Main/Main.gd" type="Script" id=4]
+[ext_resource path="res://Assate/BackgroundScene/Background.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scene/WaveChangeScreen/WaveChangeScreen.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scene/HUD/TaskVisualGuidHUD.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assate/shader/screen_SBC.shader" type="Shader" id=8]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 8 )
+shader_param/brightness = 1.0
+shader_param/contrast = 1.0
+shader_param/seturation = 1.0
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="Background" parent="." instance=ExtResource( 5 )]
+margin_left = 96.0
+margin_top = -32.0
+margin_right = 96.0
+margin_bottom = -32.0
+
+[node name="MainMenu" parent="." instance=ExtResource( 1 )]
+next_scene = ExtResource( 2 )
+desire_parent_path = NodePath("../GameParent")
+
+[node name="GameParent" type="Node2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 413.29, 300.135 )
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="TaskVisualGuid" parent="HUD" instance=ExtResource( 7 )]
+
+[node name="ColorCorrection" type="ColorRect" parent="HUD"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="WaveChangeScreen" parent="CanvasLayer" instance=ExtResource( 6 )]

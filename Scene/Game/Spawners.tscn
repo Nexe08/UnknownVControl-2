@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Character/Spawner/SpawnerHanger.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Character/Spawner/Spawner.tscn" type="PackedScene" id=4]
+
+[node name="Spawners" type="Node2D"]
+
+[node name="SpawnerPosition" type="Node2D" parent="."]
+
+[node name="1" type="Position2D" parent="SpawnerPosition"]
+position = Vector2( 64, 0 )
+__meta__ = {
+"_gizmo_extents_": 2.0
+}
+
+[node name="2" type="Position2D" parent="SpawnerPosition"]
+position = Vector2( 160, 0 )
+__meta__ = {
+"_gizmo_extents_": 2.0
+}
+
+[node name="3" type="Position2D" parent="SpawnerPosition"]
+position = Vector2( 256, 0 )
+__meta__ = {
+"_gizmo_extents_": 2.0
+}
+
+[node name="4" type="Position2D" parent="SpawnerPosition"]
+position = Vector2( 336, 0 )
+__meta__ = {
+"_gizmo_extents_": 2.0
+}
+
+[node name="SpawnerHanger" parent="." instance=ExtResource( 3 )]
+position = Vector2( 112, 0 )
+
+[node name="Spawner" parent="SpawnerHanger" instance=ExtResource( 4 )]
+spawner_type = 1
+
+[node name="SpawnerHanger2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 240, 0 )
+
+[node name="Spawner" parent="SpawnerHanger2" instance=ExtResource( 4 )]
+
+[node name="SpawnerHanger4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 368, 0 )
+
+[node name="Spawner" parent="SpawnerHanger4" instance=ExtResource( 4 )]
+
+[node name="SpawnerHanger3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 496, 0 )
+
+[node name="Spawner" parent="SpawnerHanger3" instance=ExtResource( 4 )]
+spawner_type = 1

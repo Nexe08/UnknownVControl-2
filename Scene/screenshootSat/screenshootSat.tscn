@@ -1,0 +1,338 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Assate/Tileset/Floor.tres" type="TileSet" id=1]
+[ext_resource path="res://Assate/envirnment.png" type="Texture" id=2]
+[ext_resource path="res://Assate/shader/2D wind.shader" type="Shader" id=3]
+[ext_resource path="res://Character/Player/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Object/Component/Camera2D.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assate/Font/Kenney Mini.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Assate/BackgroundScene/Background.tscn" type="PackedScene" id=7]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+void vertex() {
+    VERTEX.y += sin((UV.y - TIME * 3f) * 1f) * 8f;
+    VERTEX.x += cos((UV.x - TIME * 3f) * 1f) * 8f * UV.y;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.862745, 0.203922, 0.223529, 1 )
+corner_radius_top_left = 20
+corner_radius_top_right = 2
+corner_radius_bottom_right = 19
+corner_radius_bottom_left = 2
+expand_margin_left = 16.0
+expand_margin_right = 16.0
+expand_margin_top = 16.0
+expand_margin_bottom = 16.0
+
+[sub_resource type="DynamicFont" id=4]
+size = 32
+outline_size = 1
+font_data = ExtResource( 6 )
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 3 )
+shader_param/speed = 2.86
+shader_param/minStrength = 0.133
+shader_param/maxStrength = 0.277
+shader_param/strengthScale = 100.0
+shader_param/interval = 3.5
+shader_param/detail = 1.0
+shader_param/distortion = 0.0
+shader_param/hightOffset = 0.507
+shader_param/offset = 0.0
+
+[sub_resource type="TileSet" id=6]
+0/name = "envirnment.png 0"
+0/texture = ExtResource( 2 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 112, 80, 96, 48 )
+0/tile_mode = 2
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 16, 16 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "envirnment.png 1"
+1/texture = ExtResource( 2 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 64, 208, 16 )
+1/tile_mode = 2
+1/autotile/icon_coordinate = Vector2( 0, 0 )
+1/autotile/tile_size = Vector2( 16, 16 )
+1/autotile/spacing = 0
+1/autotile/occluder_map = [  ]
+1/autotile/navpoly_map = [  ]
+1/autotile/priority_map = [  ]
+1/autotile/z_index_map = [  ]
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+
+[sub_resource type="TileSet" id=7]
+0/name = "envirnment.png 0"
+0/texture = ExtResource( 2 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 128, 128, 16, 16 )
+0/tile_mode = 2
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 16, 16 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "envirnment.png 1"
+1/texture = ExtResource( 2 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 160, 0, 16, 32 )
+1/tile_mode = 2
+1/autotile/icon_coordinate = Vector2( 0, 0 )
+1/autotile/tile_size = Vector2( 16, 16 )
+1/autotile/spacing = 0
+1/autotile/occluder_map = [  ]
+1/autotile/navpoly_map = [  ]
+1/autotile/priority_map = [  ]
+1/autotile/z_index_map = [  ]
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+
+[sub_resource type="GDScript" id=8]
+script/source = "extends KinematicBody2D
+# Player
+
+
+var move_speed = 4.5 * 32
+var jump_force = 10 * 32
+var gravity:= 700
+var respawn_position:= Vector2.ZERO
+
+const UP = Vector2.UP
+
+onready var regain_life:= false
+onready var is_grounded: bool
+onready var velocity:= Vector2.ZERO
+
+onready var GroundDetector = $GroundDetector
+
+
+func _ready() -> void:
+    Global.Player = self
+    $BulletCounter.max_value = PlayerData.current_ammo_count
+
+
+func _physics_process(delta: float) -> void:
+    is_grounded = _check_for_ground()
+    _get_input(delta)
+    _handel_life_regain(delta)
+    velocity.y += gravity * delta
+    velocity = move_and_slide(velocity, UP)
+
+
+func _handel_life_regain(delta):
+    if move_direction() == 0: # not moving regain life
+        if regain_life:
+            if PlayerData.current_life < PlayerData.MAX_LIFE:
+                PlayerData.current_life += PlayerData.current_life_regain_speed * delta
+                $HealthBar.emit_signal(\"value_changed\", PlayerData.current_life)
+            else:
+                return
+    else:
+        regain_life = false
+        $LifeRegainCooldown.stop()
+        $LifeRegainCooldown.start()
+
+
+func _input(event: InputEvent) -> void:
+    if event.is_action_pressed(\"w\") and is_grounded:
+        velocity.y = -jump_force
+        
+    if event.is_action_released(\"w\") and velocity.y < 0:
+        velocity.y = lerp(velocity.y, 0, 0.5)
+
+
+func apply_knockback(amount, direction):
+    velocity += amount * direction
+
+
+func respawn(_respawn_position=Vector2.ZERO):
+    respawn_position = _respawn_position
+    $RespawnTimer.stop()
+    $RespawnTimer.start()
+
+
+func disable(value=true):
+    set_physics_process(value)
+    set_physics_process_internal(value)
+    set_process(value)
+    set_process_internal(value)
+
+
+#  called from object that can take damage
+func take_damage(_takken_damage, _entity_position = Vector2.ZERO):
+    PlayerData.current_life -= _takken_damage
+    $HealthBar.emit_signal(\"value_changed\", PlayerData.current_life)
+    
+    regain_life = false
+    
+    $LifeRegainCooldown.wait_time = PlayerData.current_life_regain_time
+    $LifeRegainCooldown.stop()
+    $LifeRegainCooldown.start()
+    
+    Global.Camera.shake(1, .25)
+    ScreenEffect.start_flash_screen(.05)
+    ScreenEffect.start_abration(1, .2)
+    ScreenEffect.start_grayscale(.2)
+    ScreenEffect.start_freez_screen(.1)
+
+
+# movement
+func _get_input(_dt):
+    # move
+    velocity.x = lerp(velocity.x, move_speed * move_direction(), _get_accel_and_deaccel())
+
+
+func move_direction():
+#    return -int(Input.is_action_pressed(\"a\")) + int(Input.is_action_pressed(\"d\"))
+    return int(Input.get_action_strength(\"d\") - Input.get_action_strength(\"a\"))
+
+
+# acceleration and deacceleration
+func _get_accel_and_deaccel():
+    return 0.2 if is_grounded else 0.05
+
+
+func set_is_grounded(value):
+    is_grounded = value
+
+
+func _check_for_ground():
+    if velocity.y >= 0:
+        for raycast in GroundDetector.get_children():
+            if raycast.is_colliding():
+                return true
+            else:
+                return false
+    else:
+        return false
+
+
+func _on_Gun_bullet_count_updated(value) -> void:
+    $BulletCounter.emit_signal(\"value_changed\", value)
+
+
+func _on_LifeRegainCooldown_timeout() -> void:
+    regain_life = true
+
+
+func _on_RespawnTimer_timeout() -> void:
+    global_position = respawn_position
+"
+
+[sub_resource type="Animation" id=9]
+length = 12.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 11, 12 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -16, 224 ), Vector2( 544, 224 ), Vector2( 544, 224 ) ]
+}
+
+[node name="screenshootSat" type="Node2D"]
+
+[node name="Background" parent="." instance=ExtResource( 7 )]
+margin_left = -32.0
+margin_top = 80.0
+margin_right = -32.0
+margin_bottom = 80.0
+
+[node name="Label" type="Label" parent="."]
+material = SubResource( 2 )
+margin_left = -16.0
+margin_top = 224.0
+margin_right = 140.0
+margin_bottom = 264.0
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0.172549, 0.772549, 0.964706, 1 )
+text = "Saturday"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Backgroun" type="TileMap" parent="."]
+material = SubResource( 5 )
+tile_set = SubResource( 6 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 720912, 1610612737, 5, 720913, 1610612737, 2, 720915, 1610612737, 5, 720917, 1610612737, 4, 720918, 1610612737, 2, 786445, 1610612737, 4, 851980, 1610612737, 4, 851993, 1610612737, 4, 851995, 1610612737, 4, 983051, 1610612737, 4, 983068, 1610612737, 4, 1114132, 0, 1, 1179659, 1, 5, 1179660, 1, 3, 1179661, 1, 3, 1179662, 1, 2, 1179663, 1, 5, 1179664, 1, 4, 1179665, 1, 2, 1179666, 1, 3, 1179667, 1, 3, 1179668, 0, 131072, 1179671, 1, 4, 1179672, 1, 2, 1179673, 1, 3, 1179674, 1, 4, 1179675, 1, 2 )
+
+[node name="OuterGround" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 524297, 0, 0, 524298, 0, 1, 524299, 0, 1, 524300, 0, 1, 524301, 0, 1, 524302, 0, 1, 524303, 0, 1, 524304, 0, 1, 524305, 0, 1, 524306, 0, 1, 524307, 0, 1, 524308, 0, 1, 524309, 0, 1, 524310, 0, 1, 524311, 0, 1, 524312, 0, 1, 524313, 0, 1, 524314, 0, 1, 524315, 0, 1, 524316, 0, 1, 524317, 0, 1, 524318, 0, 1, 524319, 0, 1, 524320, 0, 2, 589833, 0, 65536, 589834, 0, 65537, 589835, 0, 65537, 589836, 0, 65537, 589837, 0, 65537, 589838, 0, 65537, 589839, 0, 65537, 589840, 0, 65537, 589841, 0, 65537, 589842, 0, 65537, 589843, 0, 65537, 589844, 0, 65537, 589845, 0, 65537, 589846, 0, 65537, 589847, 0, 65537, 589848, 0, 65537, 589849, 0, 65537, 589850, 0, 65537, 589851, 0, 65537, 589852, 0, 65537, 589853, 0, 65537, 589854, 0, 65537, 589855, 0, 65537, 589856, 0, 65538, 655369, 0, 65536, 655370, 0, 65537, 655371, 0, 65537, 655372, 0, 65537, 655373, 0, 65537, 655374, 0, 65537, 655375, 0, 196608, 655376, 0, 131073, 655377, 0, 131073, 655378, 0, 131073, 655379, 0, 131073, 655380, 0, 131073, 655381, 0, 131073, 655382, 0, 131073, 655383, 0, 131073, 655384, 0, 196609, 655385, 0, 65537, 655386, 0, 65537, 655387, 0, 65537, 655388, 0, 65537, 655389, 0, 65537, 655390, 0, 65537, 655391, 0, 65537, 655392, 0, 65538, 720905, 0, 65536, 720906, 0, 65537, 720907, 0, 65537, 720908, 0, 196608, 720909, 0, 131073, 720910, 0, 131073, 720911, 0, 131074, 720920, 0, 65536, 720921, 0, 65537, 720922, 0, 65537, 720923, 0, 65537, 720924, 0, 65537, 720925, 0, 65537, 720926, 0, 65537, 720927, 0, 65537, 720928, 0, 65538, 786441, 0, 65536, 786442, 0, 65537, 786443, 0, 196608, 786444, 0, 131074, 786456, 0, 131072, 786457, 0, 131073, 786458, 0, 131073, 786459, 0, 131073, 786460, 0, 196609, 786461, 0, 65537, 786462, 0, 65537, 786463, 0, 65537, 786464, 0, 65538, 851977, 0, 65536, 851978, 0, 65537, 851979, 0, 65538, 851996, 0, 65536, 851997, 0, 65537, 851998, 0, 65537, 851999, 0, 65537, 852000, 0, 65538, 917513, 0, 65536, 917514, 0, 196608, 917515, 0, 131074, 917532, 0, 131072, 917533, 0, 131073, 917534, 0, 131073, 917535, 0, 196609, 917536, 0, 65538, 983049, 0, 65536, 983050, 0, 65538, 983071, 0, 65536, 983072, 0, 65538, 1048585, 0, 65536, 1048586, 0, 65538, 1048607, 0, 131072, 1048608, 0, 131074, 1114121, 0, 65536, 1114122, 0, 65538, 1179657, 0, 65536, 1179658, 0, 65538, 1245191, 0, 0, 1245192, 0, 1, 1245193, 0, 262145, 1245194, 0, 262144, 1245195, 0, 1, 1245196, 0, 1, 1245197, 0, 1, 1245198, 0, 1, 1245199, 0, 1, 1245200, 0, 1, 1245201, 0, 1, 1245202, 0, 1, 1245203, 0, 1, 1245204, 0, 1, 1245205, 0, 1, 1245206, 0, 1, 1245207, 0, 1, 1245208, 0, 1, 1245209, 0, 1, 1245210, 0, 1, 1245211, 0, 1, 1245212, 0, 1, 1245213, 0, 1, 1245214, 0, 1, 1245215, 0, 1, 1245216, 0, 1, 1245217, 0, 1, 1245218, 0, 2, 1310727, 0, 65536, 1310728, 0, 65537, 1310729, 0, 65537, 1310730, 0, 65537, 1310731, 0, 65537, 1310732, 0, 65537, 1310733, 0, 65537, 1310734, 0, 65537, 1310735, 0, 65537, 1310736, 0, 65537, 1310737, 0, 65537, 1310738, 0, 65537, 1310739, 0, 65537, 1310740, 0, 65537, 1310741, 0, 65537, 1310742, 0, 65537, 1310743, 0, 65537, 1310744, 0, 65537, 1310745, 0, 65537, 1310746, 0, 65537, 1310747, 0, 65537, 1310748, 0, 65537, 1310749, 0, 65537, 1310750, 0, 65537, 1310751, 0, 65537, 1310752, 0, 65537, 1310753, 0, 65537, 1310754, 0, 65538, 1376263, 0, 65536, 1376264, 0, 65537, 1376265, 0, 65537, 1376266, 0, 65537, 1376267, 0, 65537, 1376268, 0, 65537, 1376269, 0, 65537, 1376270, 0, 65537, 1376271, 0, 65537, 1376272, 0, 65537, 1376273, 0, 65537, 1376274, 0, 65537, 1376275, 0, 65537, 1376276, 0, 65537, 1376277, 0, 65537, 1376278, 0, 65537, 1376279, 0, 65537, 1376280, 0, 65537, 1376281, 0, 65537, 1376282, 0, 65537, 1376283, 0, 65537, 1376284, 0, 65537, 1376285, 0, 65537, 1376286, 0, 65537, 1376287, 0, 65537, 1376288, 0, 65537, 1376289, 0, 65537, 1376290, 0, 65538, 1441799, 0, 131072, 1441800, 0, 131073, 1441801, 0, 131073, 1441802, 0, 131073, 1441803, 0, 131073, 1441804, 0, 131073, 1441805, 0, 131073, 1441806, 0, 131073, 1441807, 0, 131073, 1441808, 0, 131073, 1441809, 0, 131073, 1441810, 0, 131073, 1441811, 0, 131073, 1441812, 0, 131073, 1441813, 0, 131073, 1441814, 0, 131073, 1441815, 0, 131073, 1441816, 0, 131073, 1441817, 0, 131073, 1441818, 0, 131073, 1441819, 0, 131073, 1441820, 0, 131073, 1441821, 0, 131073, 1441822, 0, 131073, 1441823, 0, 131073, 1441824, 0, 131073, 1441825, 0, 131073, 1441826, 0, 131074 )
+
+[node name="ForeGround" type="TileMap" parent="."]
+tile_set = SubResource( 7 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 1179669, 0, 0 )
+
+[node name="Player" parent="." instance=ExtResource( 4 )]
+position = Vector2( 352, 304 )
+script = SubResource( 8 )
+
+[node name="Camera2D" parent="." instance=ExtResource( 5 )]
+current = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 9 )
