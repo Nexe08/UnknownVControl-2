@@ -11,8 +11,8 @@ var BigHostileBullet = preload("res://Object/Bullet/BigHostileBullet.tscn")
 
 
 func _ready() -> void:
-    WaveModifire.change_onscreen_spawner_count(1) # update count
-    Life = WaveModifire.Entity_data.Spawner.Life # All spawner have same amount of Life
+    EntityData.change_onscreen_spawner_count(1) # update count
+    Life = EntityData.Spawner.Life # All spawner have same amount of Life
     $HealthBar.max_value = Life
     $HealthBar.value = Life
     
@@ -28,12 +28,12 @@ func _ready() -> void:
 
 # called from big bullet script
 func heal():
-    if Life < WaveModifire.Entity_data.Spawner.Life:
-        Life += WaveModifire.Entity_data.Spawner.Heal_amount
+    if Life < EntityData.Spawner.Life:
+        Life += EntityData.Spawner.Heal_amount
         $HealingPartical.restart()
         $HealingPartical.emitting = true
         $HealthBar.emit_signal("value_changed", Life)
-        Life = clamp(Life, 0, WaveModifire.Entity_data.Spawner.Life)
+        Life = clamp(Life, 0, EntityData.Spawner.Life)
 
 
 func take_damage(_takken_damage, _intity_position = Vector2.ZERO):
@@ -56,7 +56,7 @@ func take_damage(_takken_damage, _intity_position = Vector2.ZERO):
 
 
 func self_distruction():
-    WaveModifire.change_onscreen_spawner_count(-1) # update count
+    EntityData.change_onscreen_spawner_count(-1) # update count
     
     is_alive = false
     $HitBox/CollisionShape2D.set_deferred("disabled" , true)
@@ -81,8 +81,8 @@ func _spawn_entity():
     if is_alive:
         match spawner_type:
             TYPE.bee:
-                var bee_count = WaveModifire.Entity_data.Bee.Count
-                if WaveModifire.onscreen_bee_count < bee_count:
+                var bee_count = EntityData.Bee.Count
+                if EntityData.onscreen_bee_count < bee_count:
                     var node = Bee.instance()
                     node.global_position = $EntitySpawnPosition.global_position
                     Global.Game.add_child(node)

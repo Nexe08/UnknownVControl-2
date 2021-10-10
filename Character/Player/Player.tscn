@@ -34,7 +34,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-    set_is_grounded(_check_for_ground())
+#    set_is_grounded(_check_for_ground())
+    _check_for_ground()
     _get_input(delta)
     _handel_life_regain(delta)
     
@@ -123,11 +124,16 @@ func _check_for_ground():
     if velocity.y >= 0:
         for raycast in GroundDetector.get_children():
             if raycast.is_colliding():
-                return true
+                set_is_grounded(true)
+#                return true
             else:
-                return false
+                if is_instance_valid(self):
+                    yield(get_tree().create_timer(.2), \"timeout\")
+                    set_is_grounded(false)
+#                return false
     else:
-        return false
+        set_is_grounded(false)
+#        return false
 
 
 func set_is_grounded(value):
@@ -265,7 +271,7 @@ position = Vector2( 0, -6 )
 [node name="Sprite" type="Sprite" parent="VisualBody"]
 use_parent_material = true
 position = Vector2( 0, 6 )
-scale = Vector2( 1.1095, 0.963498 )
+scale = Vector2( 0.965443, 1.10367 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -8 )
 hframes = 3

@@ -14,10 +14,11 @@ var dead_animation = preload("res://Object/Effect/Explostion_1.tscn")
 
 
 func _ready() -> void:
-    WaveModifire.change_onscreen_bee_count(1)
-    WaveModifire.change_onscreen_enemy_count(1)
+    # update data that enemy is in screen
+    EntityData.change_onscreen_bee_count(1)
+    EntityData.change_onscreen_enemy_count(1)
     
-    Life = WaveModifire.Entity_data.Bee.Life
+    Life = EntityData.Bee.Life
     $HealthBar.max_value = Life
     $HealthBar.value = Life
     
@@ -81,9 +82,9 @@ func self_destruction():
     ScreenEffect.start_freez_screen(.07)
     ScreenEffect.start_abration(4, .2)
     
-    WaveModifire.change_onscreen_bee_count(-1) # update count
-    WaveModifire.change_onscreen_enemy_count(-1) # update count
-    WaveModifire.change_current_kill_count(1)
+    EntityData.change_onscreen_bee_count(-1) # update count
+    EntityData.change_onscreen_enemy_count(-1) # update count
+    EntityData.change_current_kill_count(1)
     
     var dead_animation_instance = dead_animation.instance()
     dead_animation_instance.global_position = global_position

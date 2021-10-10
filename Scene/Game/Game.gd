@@ -1,31 +1,50 @@
 extends Node2D
 # Game
 
-#this script change map randomly every time player clear the wave
-# for know there is only one wave
+# This Script Do
+#1 Load and delete maps
+#2 Resets Entity data for new wave
 
-var wave_map = preload("res://Scene/WaveType/WaveType_1.tscn")
+
+onready var map_container = $MapContainer
+
 
 func _ready() -> void:
-    randomize()
-# warning-ignore:return_value_discarded
-    WaveModifire.connect("change_wave", self, "_on_wave_changed")
-    add_wave_map()
-    
     Global.Game = self
+    WaveModifire.connect("can_change_wave", self, "_change_map")
 
 
-func add_wave_map():
-    var node = wave_map.instance()
-    add_child(node)
+# called by signal
+# emmited in WaveModifire script
+func _change_map():
+    $TransitionAnimation.play("in")
 
 
-func remove_prev_map():
-    var prev_map = get_children()[0]
-    if is_instance_valid(prev_map):
-        prev_map.destroy()
+# called in animation player
+# animation out
+func _add_new_map():
+    var map_instance = Global.map_1.instance()
+    map_container.add_child(map_instance)
 
 
-func _on_wave_changed():
-    remove_prev_map()
-    add_wave_map()
+# called in animation player
+# animation in
+func _remove_prev_map():
+    # delete all child in map container
+    for maps in map_container.get_children():
+        maps.queue_free()
+    
+    EntityData.reset() # reset data for next wave
+
+
+func _on_NextWaveButton_pressed() -> void:
+    $TransitionAnimation.play("out")
+
+
+############################# DEBUG ###########################################
+func _process(_delta: float) -> void:
+    _debug()
+
+func _debug():
+    $HUD/DEBUG/VBoxContainer/label.text = "Kill Count: " + String(EntityData.current_kill_count)
+############################# DEBUG ###########################################
