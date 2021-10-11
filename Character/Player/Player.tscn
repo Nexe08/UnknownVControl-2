@@ -97,7 +97,10 @@ func take_damage(_takken_damage, _entity_position = Vector2.ZERO):
     $LifeRegainCooldown.stop()
     $LifeRegainCooldown.start()
     
-    Global.Camera.shake(1, .25)
+    if is_instance_valid(Global.Camera):
+        Global.Camera.shake(1, .25)
+    
+    ScreenEffect.start_slow_time(.2)
     ScreenEffect.start_flash_screen(.05)
     ScreenEffect.start_abration(1, .2)
     ScreenEffect.start_grayscale(.2)
@@ -271,7 +274,7 @@ position = Vector2( 0, -6 )
 [node name="Sprite" type="Sprite" parent="VisualBody"]
 use_parent_material = true
 position = Vector2( 0, 6 )
-scale = Vector2( 0.965443, 1.10367 )
+scale = Vector2( 1.02146, 0.992848 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -8 )
 hframes = 3

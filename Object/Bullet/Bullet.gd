@@ -2,7 +2,7 @@ extends RigidBody2D
 # Bullet
 
 export var speed:= 800
-export var damage:= 50
+export var damage:= 1
 
 
 func _ready() -> void:

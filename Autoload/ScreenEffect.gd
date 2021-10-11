@@ -1,9 +1,14 @@
 extends Node2D
 # ScreenEffect
 
+var reset_time_scale:= false
+
 
 func _process(_delta: float) -> void:
-    $CanvasLayer/Label.text = String(Performance.get_monitor(Performance.TIME_FPS))
+    $CanvasLayer/Label.text = String(Engine.time_scale)
+#    $CanvasLayer/Label.text = String(Performance.get_monitor(Performance.TIME_FPS))
+    
+    Engine.time_scale = lerp(Engine.time_scale, 1, 2 * _delta)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -13,8 +18,11 @@ func _unhandled_input(event: InputEvent) -> void:
         start_abration(3, .1)
     
     if event.is_action_pressed("r"): # debug reload game
-        # warning-ignore:return_value_discarded
         get_tree().reload_current_scene()
+
+
+func start_slow_time(time_scale = .5):
+    Engine.time_scale = time_scale
 
 
 func start_freez_screen(time):
@@ -39,7 +47,7 @@ func start_abration(amount:float, time: float):
 
 
 
-func start_flash_screen(time, color: Color = Color.white):
+func start_flash_screen(time=0, color: Color = Color.white):
     $CanvasLayer/FlashScreen.color = color
     $CanvasLayer/FlashScreen.visible = true
     yield(get_tree().create_timer(time), "timeout")
