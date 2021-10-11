@@ -81,6 +81,7 @@ func self_destruction():
     Global.Camera.shake(3, .28)
     ScreenEffect.start_freez_screen(.07)
     ScreenEffect.start_abration(4, .2)
+    ScreenEffect.start_flash_screen(.05)
     
     EntityData.change_onscreen_bee_count(-1) # update count
     EntityData.change_onscreen_enemy_count(-1) # update count

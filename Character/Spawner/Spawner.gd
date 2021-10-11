@@ -6,10 +6,6 @@ export (TYPE) var spawner_type = TYPE.bullet
 export var Life:= 5.0
 onready var is_alive:= true
 
-var Bee = preload("res://Character/Bee/Bee.tscn")
-var BigHostileBullet = preload("res://Object/Bullet/BigHostileBullet.tscn")
-
-
 func _ready() -> void:
     EntityData.change_onscreen_spawner_count(1) # update count
     Life = EntityData.Spawner.Life # All spawner have same amount of Life
@@ -42,20 +38,36 @@ func take_damage(_takken_damage, _intity_position = Vector2.ZERO):
     
     if Life > 0:
         if is_instance_valid(self):
-            var dir = global_position.direction_to(_intity_position) # knockback direction
-            get_parent().emit_signal("get_hit", 90 * dir.x) # set hanger knockback direction
+            # knockback direction
+            var dir = global_position.direction_to(_intity_position)
             
-            $Sprite.get_material().set_shader_param("flash_modifire", 1)
+            get_hit(90 * dir.x) # set hanger knockback direction
             
-            yield(get_tree().create_timer(0.15), "timeout")
-            
-            $Sprite.get_material().set_shader_param("flash_modifire", 0)
+            # visual indicate that get hited 
+#            $Sprite.get_material().set_shader_param("flash_modifire", 1)
+#            if is_instance_valid(self):
+#                yield(get_tree().create_timer(0.15), "timeout")
+#            $Sprite.get_material().set_shader_param("flash_modifire", 0)
             Global.Camera.shake(0.9, 0.2)
     else:
         self_distruction()
 
 
+# hang if get hit
+func get_hit(value):
+    rotation_degrees = lerp(rotation_degrees, value, .12)
+    $Tween.start()
+    $Tween.interpolate_property(self, "rotation_degrees", rotation_degrees, 0, 3, Tween.TRANS_ELASTIC, Tween.EASE_OUT)
+
+
+# proceed for getting destroyed
 func self_distruction():
+    # Effect
+    Global.Camera.shake(10, .2)
+    ScreenEffect.start_freez_screen(.06)
+    ScreenEffect.start_abration(2, .23)
+    ScreenEffect.start_flash_screen(.09)
+    
     EntityData.change_onscreen_spawner_count(-1) # update count
     
     is_alive = false
@@ -63,6 +75,10 @@ func self_distruction():
     
     # change sprite to dead sprite
     $Sprite.texture = load("res://Assate/dead_spawner_sprite.png")
+    
+    var death_partical_instance = Global.Big_explosition.instance()
+    get_parent().add_child(death_partical_instance)
+    death_partical_instance.global_position = $HealingPartical.global_position
     
     # stop processing
     set_physics_process(false)
@@ -83,14 +99,14 @@ func _spawn_entity():
             TYPE.bee:
                 var bee_count = EntityData.Bee.Count
                 if EntityData.onscreen_bee_count < bee_count:
-                    var node = Bee.instance()
+                    var node = Global.Bee.instance()
+                    get_parent().add_child(node)
                     node.global_position = $EntitySpawnPosition.global_position
-                    Global.Game.add_child(node)
             
             TYPE.bullet:
                 for i in 3:
-                    var node = BigHostileBullet.instance()
-                    node.global_position = $EntitySpawnPosition.global_position
+                    var node = Global.BigHostileBullet.instance()
                     node.shoot(Vector2(rand_range(-1, 1), 1), self)
-                    Global.Game.add_child(node)
+                    get_parent().add_child(node)
+                    node.global_position = $EntitySpawnPosition.global_position
 
