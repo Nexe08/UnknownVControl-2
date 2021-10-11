@@ -5,6 +5,8 @@ enum TYPE {bullet, bee}
 export (TYPE) var spawner_type = TYPE.bullet
 export var Life:= 5.0
 onready var is_alive:= true
+onready var ready_to_engage:= false setget set_ready_to_engage
+
 
 func _ready() -> void:
     EntityData.change_onscreen_spawner_count(1) # update count
@@ -33,24 +35,24 @@ func heal():
 
 
 func take_damage(_takken_damage, _intity_position = Vector2.ZERO):
-    Life -= _takken_damage
-    $HealthBar.emit_signal("value_changed", Life)
-    
-    if Life > 0:
-        if is_instance_valid(self):
-            # knockback direction
-            var dir = global_position.direction_to(_intity_position)
-            
-            get_hit(90 * dir.x) # set hanger knockback direction
-            
-            # visual indicate that get hited 
-#            $Sprite.get_material().set_shader_param("flash_modifire", 1)
-#            if is_instance_valid(self):
-#                yield(get_tree().create_timer(0.15), "timeout")
-#            $Sprite.get_material().set_shader_param("flash_modifire", 0)
-            Global.Camera.shake(0.9, 0.2)
-    else:
-        self_distruction()
+    if ready_to_engage:
+        Life -= _takken_damage
+        $HealthBar.emit_signal("value_changed", Life)
+        
+        if Life > 0:
+            if is_instance_valid(self):
+                # knockback direction
+                var dir = global_position.direction_to(_intity_position)
+                
+                get_hit(90 * dir.x) # set hanger knockback direction
+                
+                # visual indicate that get hited (flash)
+#                $Sprite.get_material().set_shader_param("flash_modifire", 1)
+#                if is_instance_valid(self):
+#                    yield(get_tree().create_timer(0.15), "timeout")
+#                $Sprite.get_material().set_shader_param("flash_modifire", 0)
+        else:
+            self_distruction()
 
 
 # hang if get hit
@@ -72,6 +74,9 @@ func self_distruction():
     
     is_alive = false
     $HitBox/CollisionShape2D.set_deferred("disabled" , true)
+    
+    # this instance will deleted after animation was finished
+    $InAndOutInScreen.play("out")
     
     # change sprite to dead sprite
     $Sprite.texture = load("res://Assate/dead_spawner_sprite.png")
@@ -110,3 +115,8 @@ func _spawn_entity():
                     get_parent().add_child(node)
                     node.global_position = $EntitySpawnPosition.global_position
 
+
+# called in animation player
+func set_ready_to_engage(value: bool):
+    ready_to_engage = value
+    print(ready_to_engage , " : ", value)
