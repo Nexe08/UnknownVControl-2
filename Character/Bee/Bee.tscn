@@ -10,6 +10,55 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 4 )
 
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "attacking"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "flying"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "spawning"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "taking_damage"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachine" id=17]
+states/attacking/node = SubResource( 6 )
+states/attacking/position = Vector2( 84, 91 )
+states/flying/node = SubResource( 7 )
+states/flying/position = Vector2( 248, 91 )
+states/spawning/node = SubResource( 8 )
+states/spawning/position = Vector2( 248.778, -13 )
+states/taking_damage/node = SubResource( 9 )
+states/taking_damage/position = Vector2( 248, 237 )
+transitions = [ "attacking", "taking_damage", SubResource( 10 ), "attacking", "flying", SubResource( 11 ), "flying", "attacking", SubResource( 12 ), "taking_damage", "attacking", SubResource( 13 ), "taking_damage", "flying", SubResource( 14 ), "flying", "taking_damage", SubResource( 15 ), "spawning", "flying", SubResource( 16 ) ]
+start_node = "spawning"
+graph_offset = Vector2( -111.012, -69 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=18]
+
 [sub_resource type="Animation" id=2]
 resource_name = "attacking"
 length = 0.5
@@ -63,6 +112,23 @@ tracks/3/keys = {
 "update": 0,
 "values": [ 0.0 ]
 }
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ true ],
+"method": "set_can_take_damage"
+}, {
+"args": [ true ],
+"method": "set_can_take_damage"
+} ]
+}
 
 [sub_resource type="Animation" id=3]
 length = 0.4
@@ -98,11 +164,52 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "values": [ {
 "args": [  ],
 "method": "detect_target"
+}, {
+"args": [  ],
+"method": "detect_target"
+}, {
+"args": [  ],
+"method": "detect_target"
+}, {
+"args": [  ],
+"method": "detect_target"
+}, {
+"args": [  ],
+"method": "detect_target"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ true ],
+"method": "set_can_take_damage"
+}, {
+"args": [ true ],
+"method": "set_can_take_damage"
 } ]
 }
 
@@ -145,6 +252,35 @@ tracks/2/keys = {
 "update": 1,
 "values": [ false, true ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpawningSprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ false ],
+"method": "set_can_take_damage"
+}, {
+"args": [ false ],
+"method": "set_can_take_damage"
+} ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "taking_damage"
@@ -173,55 +309,23 @@ tracks/1/keys = {
 "update": 0,
 "values": [ 1.0, 1.0 ]
 }
-
-[sub_resource type="AnimationNodeAnimation" id=6]
-animation = "attacking"
-
-[sub_resource type="AnimationNodeAnimation" id=7]
-animation = "flying"
-
-[sub_resource type="AnimationNodeAnimation" id=8]
-animation = "spawning"
-
-[sub_resource type="AnimationNodeAnimation" id=9]
-animation = "taking_damage"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=10]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=11]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=12]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=13]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=14]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=15]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=16]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachine" id=17]
-states/attacking/node = SubResource( 6 )
-states/attacking/position = Vector2( 84, 91 )
-states/flying/node = SubResource( 7 )
-states/flying/position = Vector2( 248, 91 )
-states/spawning/node = SubResource( 8 )
-states/spawning/position = Vector2( 259, 23 )
-states/taking_damage/node = SubResource( 9 )
-states/taking_damage/position = Vector2( 248, 237 )
-transitions = [ "attacking", "taking_damage", SubResource( 10 ), "attacking", "flying", SubResource( 11 ), "flying", "attacking", SubResource( 12 ), "taking_damage", "attacking", SubResource( 13 ), "taking_damage", "flying", SubResource( 14 ), "flying", "taking_damage", SubResource( 15 ), "spawning", "flying", SubResource( 16 ) ]
-start_node = "spawning"
-graph_offset = Vector2( -111.012, -69 )
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id=18]
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ false ],
+"method": "set_can_take_damage"
+}, {
+"args": [ false ],
+"method": "set_can_take_damage"
+} ]
+}
 
 [sub_resource type="RectangleShape2D" id=19]
 extents = Vector2( 8, 9 )
@@ -235,7 +339,7 @@ shader_param/flash_color = Color( 1, 1, 1, 1 )
 shader_param/flash_modifire = 0.0
 
 [node name="Bee" type="KinematicBody2D"]
-collision_layer = 0
+collision_layer = 512
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -243,17 +347,17 @@ visible = false
 position = Vector2( 0, 2 )
 shape = SubResource( 1 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/attacking = SubResource( 2 )
-anims/flying = SubResource( 3 )
-anims/spawning = SubResource( 4 )
-anims/taking_damage = SubResource( 5 )
-
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 17 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 18 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/attacking = SubResource( 2 )
+anims/flying = SubResource( 3 )
+anims/spawning = SubResource( 4 )
+anims/taking_damage = SubResource( 5 )
 
 [node name="HitBox" parent="." instance=ExtResource( 4 )]
 visible = false
@@ -282,9 +386,10 @@ texture = ExtResource( 1 )
 hframes = 2
 
 [node name="SpawningSprite" type="Sprite" parent="."]
+visible = false
 texture = ExtResource( 6 )
 hframes = 3
 vframes = 3
-frame = 5
+frame = 8
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

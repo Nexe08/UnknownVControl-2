@@ -10,6 +10,8 @@ onready var onscreen_enemy_count:int = 0 # count all enemy
 onready var onscreen_bee_count: int = 0
 onready var onscreen_spawner_count: int = 0
 
+onready var difficulty_threshold:= 0.2
+
 var Bee = {
     "Count": int(rand_range(4, 6)), # Max number of instance at a time on screen
     "Life": 2 # HP
@@ -28,6 +30,13 @@ var BigHostileBullet = {
     "LifeTime": 4.0,
     "Damping": 0.4
 }
+
+
+func update_dificulty(level):
+    # difficulty = current difficulty + level * difficulty threshold
+    
+    # not add becase need to check old code structure
+    pass
 
 
 # reset every data like kill count

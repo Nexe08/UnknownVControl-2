@@ -1,9 +1,12 @@
 extends KinematicBody2D
 # Bee
 
+export var passiv_mode:= false
+
 var Life = 1
 var velocity:= Vector2.ZERO
 onready var can_attack:= false
+onready var can_take_damage:= false setget set_can_take_damage
 
 onready var target
 
@@ -28,6 +31,30 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+#    if is_instance_valid(target): # is target (Player) is in tree
+#        var target_direction = global_position.direction_to(target.global_position)
+#        var distance_from_target = global_position.distance_to(target.global_position)
+#
+#        $Sprite.flip_h = true if target_direction.x < 0 else false # rotate sprite
+#
+#        if distance_from_target < 64: # move away from target
+#            _handel_movement(-target_direction, 0.05)
+#            can_attack = false
+#        elif distance_from_target > 64 + 32: # move towords target
+#            _handel_movement(target_direction, 0.05)
+#            can_attack = false
+#        else: # stop and fire projectile on taeget
+#            velocity = lerp(velocity, Vector2.ZERO, 0.005)
+#            can_attack = true
+    
+    velocity = move_and_slide(velocity)
+
+
+# called in animation player
+func detect_target():
+    if target == null:
+        target = Global.Player
+    
     if is_instance_valid(target): # is target (Player) is in tree
         var target_direction = global_position.direction_to(target.global_position)
         var distance_from_target = global_position.distance_to(target.global_position)
@@ -40,24 +67,18 @@ func _physics_process(_delta: float) -> void:
         elif distance_from_target > 64 + 32: # move towords target
             _handel_movement(target_direction, 0.05)
             can_attack = false
-        else: # stop and fire prokectile on taeget
+        else: # stop and fire projectile on taeget
             velocity = lerp(velocity, Vector2.ZERO, 0.005)
             can_attack = true
     
-    velocity = move_and_slide(velocity)
-
-
-func detect_target():
-    if target == null:
-        target = Global.Player
 
 
 func shoot_projectile(): # called in animation player
-    var bullet_instance = bullet.instance()
+    var bullet_instance = Global.HostileBullet.instance()
     var target_direction = global_position.direction_to(target.global_position)
+    get_parent().add_child(bullet_instance)
     bullet_instance.global_position = global_position
     bullet_instance.shoot(target_direction)
-    Global.Game.add_child(bullet_instance)
 
 
 # accelerate towords direction
@@ -67,6 +88,9 @@ func _handel_movement(_direction, _acceleration):
 
 
 func take_damage(_takken_damage, _entity_position = Vector2.ZERO):
+    if can_take_damage == false:
+        return
+    
     Life -= _takken_damage
     $HealthBar.emit_signal("value_changed", Life)
     
@@ -87,12 +111,22 @@ func self_destruction():
     EntityData.change_onscreen_enemy_count(-1) # update count
     EntityData.change_current_kill_count(1)
     
-    var dead_animation_instance = dead_animation.instance()
+    # spawn dead animation to tree and delete self instance
+    var dead_animation_instance = Global.Dead_animation.instance()
+    get_parent().add_child(dead_animation_instance)
     dead_animation_instance.global_position = global_position
-    Global.Game.add_child(dead_animation_instance)
+    
     queue_free()
 
 
+func set_can_take_damage(value: bool):
+    can_take_damage = value
+
+
+# controlling attack state cooldown
 func _on_Timer_timeout() -> void:
-    if can_attack:
-        fsm.travel("attacking")
+    if not passiv_mode:
+        if can_attack:
+            fsm.travel("attacking")
+    else:
+        return

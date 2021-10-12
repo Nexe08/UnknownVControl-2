@@ -311,7 +311,7 @@ position = Vector2( 0, -6 )
 [node name="Sprite" type="Sprite" parent="VisualBody"]
 use_parent_material = true
 position = Vector2( 0, 6 )
-scale = Vector2( 1.05461, 1.04539 )
+scale = Vector2( 1.03093, 1.06907 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -8 )
 hframes = 3
