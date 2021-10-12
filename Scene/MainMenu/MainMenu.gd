@@ -24,4 +24,10 @@ func _player_wanna_to_play(_body: Node) -> void:
 
 
 func _player_wanna_to_leave(_body: Node) -> void:
+    # for testing
+    var node = preload("res://Scene/screenshootSat/screenshootSat.tscn")
+    SceneChanger.emit_signal("start_transition", node, desire_parent)
+    disable(true)
+    
+    
     pass # Replace with function body.

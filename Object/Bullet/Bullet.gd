@@ -19,6 +19,10 @@ func shoot(direction):
 
 
 func self_destruction():
+    var explosition_instance = Global.Bullet_explosition.instance()
+    get_parent().add_child(explosition_instance)
+    explosition_instance.global_position = global_position
+    
     queue_free()
 
 
