@@ -24,7 +24,6 @@ position = Vector2( 13, 0 )
 use_parent_material = true
 
 [node name="ReloadTime" type="Timer" parent="."]
-wait_time = 1.7
 one_shot = true
 
 [connection signal="timeout" from="ReloadTime" to="." method="_on_MagRefillCooldown_timeout"]

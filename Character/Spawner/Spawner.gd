@@ -35,24 +35,29 @@ func heal():
 
 
 func take_damage(_takken_damage, _intity_position = Vector2.ZERO):
-    if ready_to_engage:
-        Life -= _takken_damage
-        $HealthBar.emit_signal("value_changed", Life)
-        
-        if Life > 0:
-            if is_instance_valid(self):
-                # knockback direction
-                var dir = global_position.direction_to(_intity_position)
-                
-                get_hit(90 * dir.x) # set hanger knockback direction
-                
-                # visual indicate that get hited (flash)
+    if not ready_to_engage:
+        Global.add_damage_popup_text("!", self, $EntitySpawnPosition.global_position)
+        return
+    
+    Life -= _takken_damage
+    $HealthBar.emit_signal("value_changed", Life)
+    
+    Global.add_damage_popup_text(_takken_damage, self, $EntitySpawnPosition.global_position)
+    
+    if Life > 0:
+        if is_instance_valid(self):
+            # knockback direction
+            var dir = global_position.direction_to(_intity_position)
+            
+            get_hit(90 * dir.x) # set hanger knockback direction
+            
+            # visual indicate that get hited (flash)
 #                $Sprite.get_material().set_shader_param("flash_modifire", 1)
 #                if is_instance_valid(self):
 #                    yield(get_tree().create_timer(0.15), "timeout")
 #                $Sprite.get_material().set_shader_param("flash_modifire", 0)
-        else:
-            self_distruction()
+    else:
+        self_distruction()
 
 
 # hang if get hit
@@ -119,4 +124,3 @@ func _spawn_entity():
 # called in animation player
 func set_ready_to_engage(value: bool):
     ready_to_engage = value
-    print(ready_to_engage , " : ", value)

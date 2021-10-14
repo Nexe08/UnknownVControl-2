@@ -13,14 +13,12 @@ func _process(_delta: float) -> void:
         modulate = modulate.linear_interpolate(Color(1, 1, 1, 0), 10 * get_physics_process_delta_time())
 
 
-func _unhandled_input(event: InputEvent) -> void:
-    if event.is_action_pressed("s"):
-            get_parent().take_damage(1)
-
-
 func _on_HealthBar_value_changed(_value: float) -> void:
     hide = false
+    
     value = _value
+    max_value = PlayerData.MAX_LIFE
+    
     # 20% of max health
     if ((PlayerData.MAX_LIFE * 100) / 20) < 20:
         $AnimationPlayer.play("below_20per")
@@ -28,6 +26,7 @@ func _on_HealthBar_value_changed(_value: float) -> void:
         $AnimationPlayer.play("default")
         $Timer.stop()
         $Timer.start()
+    
     modulate = Color(1, 1, 1, 1)
 
 

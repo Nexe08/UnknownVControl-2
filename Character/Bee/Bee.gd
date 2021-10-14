@@ -9,6 +9,7 @@ onready var can_attack:= false
 onready var can_take_damage:= false setget set_can_take_damage
 
 onready var target
+onready var sibling
 
 onready var fsm = $AnimationTree.get("parameters/playback")
 
@@ -70,7 +71,16 @@ func detect_target():
         else: # stop and fire projectile on taeget
             velocity = lerp(velocity, Vector2.ZERO, 0.005)
             can_attack = true
+
+
+# called in animtion player 
+func detect_sibling():
+    if sibling == null:
+        return
     
+    if is_instance_valid(sibling):
+        var dir = global_position.direction_to(sibling.global_position)
+        _handel_movement(-dir, 0.05)
 
 
 func shoot_projectile(): # called in animation player
@@ -89,10 +99,13 @@ func _handel_movement(_direction, _acceleration):
 
 func take_damage(_takken_damage, _entity_position = Vector2.ZERO):
     if can_take_damage == false:
+        Global.add_damage_popup_text("!", self, global_position)
         return
     
     Life -= _takken_damage
     $HealthBar.emit_signal("value_changed", Life)
+    
+    Global.add_damage_popup_text(_takken_damage, self, global_position)
     
     if Life <= 0:
         self_destruction()
@@ -130,3 +143,15 @@ func _on_Timer_timeout() -> void:
             fsm.travel("attacking")
     else:
         return
+
+
+# Soft collision between another Bee
+func _on_another_bee_detected(body: Node) -> void:
+    if body.is_in_group("Bee"):
+        sibling = body
+
+
+func _on_sibling_exited_area(body: Node) -> void:
+    if body.is_in_group("Bee"):
+        if sibling == body:
+            sibling = null

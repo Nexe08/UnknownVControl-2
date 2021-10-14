@@ -10,10 +10,10 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 18 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 16, 18 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 1, 0.211765, 0.211765, 1 )
 border_width_left = 1
 border_width_top = 1
@@ -26,14 +26,14 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 1, 1, 1, 1 )
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "anticipation"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:scale")
@@ -62,7 +62,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 resource_name = "default"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:scale")
@@ -77,7 +77,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 resource_name = "in"
 length = 2.0
 tracks/0/type = "method"
@@ -215,7 +215,7 @@ tracks/12/keys = {
 "times": PoolRealArray( 0, 2 )
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=8]
 resource_name = "out"
 length = 2.0
 tracks/0/type = "method"
@@ -382,7 +382,7 @@ collision_layer = 512
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2( 0, 16 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="HealthBar" parent="." instance=ExtResource( 5 )]
 modulate = Color( 1, 1, 1, 0 )
@@ -392,21 +392,21 @@ margin_right = 46.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 0, 0 )
 rect_scale = Vector2( 0.462324, 0.407332 )
-custom_styles/fg = SubResource( 4 )
-custom_styles/bg = SubResource( 5 )
+custom_styles/fg = SubResource( 3 )
+custom_styles/bg = SubResource( 4 )
 
 [node name="HealingPartical" parent="." instance=ExtResource( 6 )]
 position = Vector2( 0, 32 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "default"
-anims/anticipation = SubResource( 6 )
-anims/default = SubResource( 7 )
+anims/anticipation = SubResource( 5 )
+anims/default = SubResource( 6 )
 
 [node name="InAndOutInScreen" type="AnimationPlayer" parent="."]
 autoplay = "in"
-anims/in = SubResource( 8 )
-anims/out = SubResource( 9 )
+anims/in = SubResource( 7 )
+anims/out = SubResource( 8 )
 __meta__ = {
 "_editor_description_": "Sorry about wieard name"
 }

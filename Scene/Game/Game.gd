@@ -37,6 +37,7 @@ func _remove_prev_map():
     EntityData.reset() # reset data for next wave
 
 
+# emmited in wave change screen on next button pressed (space)
 func _on_NextWaveButton_pressed() -> void:
     $TransitionAnimation.play("out")
 

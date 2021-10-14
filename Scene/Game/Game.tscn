@@ -1,44 +1,14 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scene/WaveMap/Map_1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assate/Font/default.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Scene/Game/Game.gd" type="Script" id=3]
-[ext_resource path="res://Assate/Font/Kenney Mini.ttf" type="DynamicFontData" id=4]
-
-[sub_resource type="DynamicFont" id=1]
-size = 32
-font_data = ExtResource( 4 )
-
-[sub_resource type="DynamicFont" id=2]
-size = 32
-font_data = ExtResource( 4 )
-
-[sub_resource type="InputEventAction" id=3]
-action = "space"
-
-[sub_resource type="ShortCut" id=4]
-shortcut = SubResource( 3 )
-
-[sub_resource type="Animation" id=5]
-resource_name = "default"
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
+[ext_resource path="res://Scene/WaveChangeScreen/WaveChangeScreen.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Animation" id=6]
 resource_name = "default"
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("HUD/Control:rect_position:x")
+tracks/0/path = NodePath("HUD/WaveChangeScreen:rect_position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -48,7 +18,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("HUD/Control:rect_position:y")
+tracks/1/path = NodePath("HUD/WaveChangeScreen:rect_position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -60,15 +30,16 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=7]
 resource_name = "in"
+length = 0.5
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("HUD/Control:rect_position:x")
+tracks/0/path = NodePath("HUD/WaveChangeScreen:rect_position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 624, -0.25, 0, 0.256221, -442.204, 0, -0.475357, -10.7922, 0.25, 0 ),
-"times": PoolRealArray( 0, 1 )
+"points": PoolRealArray( 624, -0.25, 0, 0.291939, -557.991, 0, -0.195556, 22.6667, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -77,7 +48,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.5 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -87,15 +58,16 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=8]
 resource_name = "out"
+length = 0.5
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("HUD/Control:rect_position:x")
+tracks/0/path = NodePath("HUD/WaveChangeScreen:rect_position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.771714, 149.698, 624, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 1 )
+"points": PoolRealArray( 0, -0.25, 0, 0.195611, 481.525, 624, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -151,118 +123,12 @@ custom_colors/font_color = Color( 0.458824, 1, 0.266667, 1 )
 align = 1
 valign = 1
 
-[node name="Control" type="Control" parent="HUD"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 624.0
-margin_right = 624.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Background" type="ColorRect" parent="HUD/Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0.262745, 0.290196, 0.372549, 1 )
-
-[node name="VBox" type="VBoxContainer" parent="HUD/Control/Background"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="DetailWindow" type="Control" parent="HUD/Control/Background/VBox"]
-margin_right = 612.0
-margin_bottom = 178.0
-rect_min_size = Vector2( 0, 16 )
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TextHBox" type="HBoxContainer" parent="HUD/Control/Background/VBox/DetailWindow"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="WaveText" type="Label" parent="HUD/Control/Background/VBox/DetailWindow/TextHBox"]
-margin_top = 47.0
-margin_right = 292.0
-margin_bottom = 130.0
-size_flags_horizontal = 3
-custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0.862745, 0.203922, 0.223529, 1 )
-text = "Wave
-"
-align = 2
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="WaveCount" type="Label" parent="HUD/Control/Background/VBox/DetailWindow/TextHBox"]
-margin_left = 296.0
-margin_top = 47.0
-margin_right = 316.0
-margin_bottom = 130.0
-custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0.533333, 0.670588, 0.0784314, 1 )
-text = "0
-"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CompleteText" type="Label" parent="HUD/Control/Background/VBox/DetailWindow/TextHBox"]
-margin_left = 320.0
-margin_top = 47.0
-margin_right = 612.0
-margin_bottom = 130.0
-size_flags_horizontal = 3
-custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0.862745, 0.203922, 0.223529, 1 )
-text = "Complete.
-"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="intractionWindow" type="Control" parent="HUD/Control/Background/VBox"]
-margin_top = 182.0
-margin_right = 612.0
-margin_bottom = 360.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="NextWaveButton" type="Button" parent="HUD/Control/Background/VBox/intractionWindow"]
-modulate = Color( 1, 1, 1, 0.856954 )
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -228.0
-margin_top = -23.0
-margin_right = 228.0
-margin_bottom = 23.0
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.533333, 0.670588, 0.0784314, 1 )
-button_mask = 0
-shortcut = SubResource( 4 )
-text = "Press Space for NextWave"
-flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/Control/Background/VBox/intractionWindow/NextWaveButton"]
-autoplay = "default"
-anims/default = SubResource( 5 )
+[node name="WaveChangeScreen" parent="HUD" instance=ExtResource( 4 )]
+margin_left = 0.0
+margin_right = 0.000244141
 
 [node name="TransitionAnimation" type="AnimationPlayer" parent="."]
 autoplay = "default"
 anims/default = SubResource( 6 )
 anims/in = SubResource( 7 )
 anims/out = SubResource( 8 )
-
-[connection signal="pressed" from="HUD/Control/Background/VBox/intractionWindow/NextWaveButton" to="." method="_on_NextWaveButton_pressed"]

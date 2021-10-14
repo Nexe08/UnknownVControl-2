@@ -32,7 +32,7 @@ var BigHostileBullet = {
 }
 
 
-func update_dificulty(level):
+func update_dificulty(_level):
     # difficulty = current difficulty + level * difficulty threshold
     
     # not add becase need to check old code structure

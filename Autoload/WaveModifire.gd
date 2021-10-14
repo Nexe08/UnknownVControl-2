@@ -1,6 +1,7 @@
 extends Node
 # WaveModifire
 
+# called by main to change map
 signal can_change_wave
 
 
@@ -10,7 +11,7 @@ func _ready() -> void:
 
 # it will check all task or condition to alter next wave
 func _check_wave_change_possibility():
-    if EntityData.current_kill_count >= 5:
+    if EntityData.current_kill_count >= 5000:
         emit_signal("can_change_wave")
 
 

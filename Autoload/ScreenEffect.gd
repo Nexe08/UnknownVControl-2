@@ -5,8 +5,7 @@ var reset_time_scale:= false
 
 
 func _process(_delta: float) -> void:
-    $CanvasLayer/Label.text = String(Engine.time_scale)
-#    $CanvasLayer/Label.text = String(Performance.get_monitor(Performance.TIME_FPS))
+    $CanvasLayer/Label.text = String(Performance.get_monitor(Performance.TIME_FPS))
     
     Engine.time_scale = lerp(Engine.time_scale, 1, 2 * _delta)
 

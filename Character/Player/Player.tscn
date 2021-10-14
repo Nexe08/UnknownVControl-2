@@ -14,9 +14,10 @@
 script/source = "extends KinematicBody2D
 # Player
 
-
-var move_speed = 4.5 * 32
-var jump_force = 10 * 32
+var normal_speed:= 4.5 * 32
+var bunny_speed:= 8 * 32
+var move_speed:= 4.5 * 32
+var jump_force:= 10 * 32
 var gravity:= 700
 var respawn_position:= Vector2.ZERO
 
@@ -40,10 +41,14 @@ func _physics_process(delta: float) -> void:
     _get_input(delta)
     _handel_life_regain(delta)
     
+    if is_grounded:
+        move_speed = normal_speed
+    
     velocity.y += gravity * delta
     velocity = move_and_slide(velocity, UP)
 
 
+# will refill health if is standing still
 func _handel_life_regain(delta):
     if move_direction() == 0: # not moving regain life
         if regain_life:
@@ -62,9 +67,11 @@ func _handel_life_regain(delta):
 func _input(event: InputEvent) -> void:
     if event.is_action_pressed(\"w\") and is_grounded:
             velocity.y = -jump_force
+            move_speed = normal_speed
         
     if event.is_action_released(\"w\") and velocity.y < 0:
         velocity.y = lerp(velocity.y, 0, 0.35)
+        move_speed = bunny_speed
 
 
 # when take damage or firing gun
@@ -85,6 +92,16 @@ func disable(value=true):
     set_physics_process_internal(value)
     set_process(value)
     set_process_internal(value)
+
+
+# called in animation player
+func play_walk_sfx():
+    AudioManager.play_walk_sfx()
+
+
+# called in animation player
+func play_jump_sfx():
+    AudioManager.play_jump_sfx()
 
 
 #  called from object that can take damage
@@ -226,6 +243,20 @@ tracks/1/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/2/type = "method"
+tracks/2/path = NodePath("../..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_jump_sfx"
+} ]
+}
 
 [sub_resource type="Animation" id=5]
 length = 0.3
@@ -254,6 +285,20 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("../..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_walk_sfx"
+} ]
 }
 
 [sub_resource type="AnimationNodeAnimation" id=6]
@@ -311,7 +356,7 @@ position = Vector2( 0, -6 )
 [node name="Sprite" type="Sprite" parent="VisualBody"]
 use_parent_material = true
 position = Vector2( 0, 6 )
-scale = Vector2( 1.03093, 1.06907 )
+scale = Vector2( 0.99137, 1.02589 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -8 )
 hframes = 3
@@ -337,6 +382,9 @@ scale = Vector2( 0.959931, 1.12021 )
 script = ExtResource( 7 )
 
 [node name="Gun" parent="VisualBody/WeaponHandler" instance=ExtResource( 5 )]
+
+[node name="ReloadTime" parent="VisualBody/WeaponHandler/Gun" index="2"]
+wait_time = 0.7
 
 [node name="Melee" parent="VisualBody/WeaponHandler" instance=ExtResource( 6 )]
 visible = false
