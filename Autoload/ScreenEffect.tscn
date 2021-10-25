@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Autoload/ScreenEffect.gd" type="Script" id=1]
 [ext_resource path="res://Object/Component/Effect/FalingLefe.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assate/shader/Grayscale.shader" type="Shader" id=3]
 [ext_resource path="res://Object/Component/Effect/FlashScreen.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assate/BalckCornerScreenOverlay.png" type="Texture" id=5]
 [ext_resource path="res://Assate/shader/Chromatic_abration.shader" type="Shader" id=7]
@@ -55,8 +56,11 @@ color_ramp = SubResource( 4 )
 
 [sub_resource type="ShaderMaterial" id=10]
 shader = ExtResource( 7 )
-shader_param/strength = 0.0
-shader_param/grayscale = false
+shader_param/strength = Vector2( 0, 0 )
+
+[sub_resource type="ShaderMaterial" id=11]
+shader = ExtResource( 3 )
+shader_param/on = false
 
 [node name="ScreenEffect" type="Node2D"]
 pause_mode = 2
@@ -66,8 +70,10 @@ script = ExtResource( 1 )
 
 [node name="FalingLefe" parent="CanvasLayer" instance=ExtResource( 2 )]
 pause_mode = 1
-position = Vector2( 288, 144 )
+position = Vector2( 288, 16 )
 process_material = SubResource( 9 )
+
+[node name="FlashScreen" parent="CanvasLayer" instance=ExtResource( 4 )]
 
 [node name="Abration" type="ColorRect" parent="CanvasLayer"]
 material = SubResource( 10 )
@@ -77,25 +83,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FlashScreen" parent="CanvasLayer" instance=ExtResource( 4 )]
-
-[node name="EdgeBlackness" type="TextureRect" parent="CanvasLayer"]
-modulate = Color( 1, 1, 1, 0.623529 )
+[node name="ScreenColor" type="ColorRect" parent="CanvasLayer"]
+material = SubResource( 11 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 5 )
-expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="CanvasLayer"]
-margin_right = 16.0
-margin_bottom = 16.0
-custom_colors/font_color = Color( 0.172549, 1, 0, 1 )
-text = "00"
-align = 1
-valign = 1
+[node name="EdgeBlackness" type="TextureRect" parent="CanvasLayer"]
+modulate = Color( 1, 1, 1, 0.0784314 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 5 )
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -1,6 +1,13 @@
 extends Node2D
 # Weapon Handler
 
+"""
+OLD:
+    if player is moving: slow bullet recovery
+NEW:
+    if player is miving: fast bullet recovery
+"""
+
 
 onready var parent = get_parent().get_parent() # Player
 
@@ -12,12 +19,13 @@ func _process(_delta: float) -> void:
 
 
 func manage_reload_speed_and_time():
-    if parent.move_direction() != 0: # moving
+#    if parent.move_direction() != 0: # moving
+    if parent.move_direction() == 0: # not moving
         PlayerData.current_reload_speed = PlayerData.MAX_RELOAD_SPEED
-        PlayerData.current_reload_time = PlayerData.MAX_RELOAD_TIME + .3
-    else: # not moving
-        PlayerData.current_reload_speed = PlayerData.MAX_RELOAD_SPEED * 5
-        PlayerData.current_reload_time = PlayerData.MAX_RELOAD_TIME - .3
+        PlayerData.current_reload_time = PlayerData.MAX_RELOAD_TIME + .5
+    else: # moving
+        PlayerData.current_reload_speed = PlayerData.MAX_RELOAD_SPEED * 3
+        PlayerData.current_reload_time = PlayerData.MAX_RELOAD_TIME - .4
 
 
 func input_direction() -> Vector2:
