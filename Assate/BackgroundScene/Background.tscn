@@ -50,7 +50,7 @@ __meta__ = {
 }
 
 [node name="Sun" parent="." instance=ExtResource( 6 )]
-position = Vector2( 459, 218 )
+position = Vector2( 480, 192 )
 
 [node name="Cloud" type="Node2D" parent="."]
 

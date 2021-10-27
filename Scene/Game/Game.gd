@@ -1,31 +1,29 @@
 extends Node2D
 # Game
 
-#this script change map randomly every time player clear the wave
-# for know there is only one wave
+# This Script Do
+#1 Load and delete maps
+#2 Resets Entity data for new wave
 
-var wave_map = preload("res://Scene/WaveType/WaveType_1.tscn")
+
+onready var map_container = $MapContainer
+
 
 func _ready() -> void:
-    randomize()
-# warning-ignore:return_value_discarded
-    WaveModifire.connect("change_wave", self, "_on_wave_changed")
-    add_wave_map()
-    
     Global.Game = self
+#    WaveModifire.connect("can_change_wave", self, "_change_map")
 
 
-func add_wave_map():
-    var node = wave_map.instance()
-    add_child(node)
+# called by map changing portal script
+func change_map():
+    var next_map = load("res://Scene/WaveMap/Map_1.tscn")
+    
+    SceneChanger.emit_signal("start_transition", next_map, $MapContainer)
+    
+    SceneChanger.remove_scene(WaveModifire.current_map)
+    
+    if is_instance_valid(Global.Player):
+        Global.Player.disable(true)
+    
+    EntityData.reset() # reset data for next wave
 
-
-func remove_prev_map():
-    var prev_map = get_children()[0]
-    if is_instance_valid(prev_map):
-        prev_map.destroy()
-
-
-func _on_wave_changed():
-    remove_prev_map()
-    add_wave_map()

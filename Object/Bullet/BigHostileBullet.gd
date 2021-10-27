@@ -10,13 +10,13 @@ var created_by = null # Spawned By node @ Sapwner
 
 
 func _ready() -> void:
-    $LifeTime.wait_time = WaveModifire.Entity_data.BigHostileBullet.LifeTime
+    $LifeTime.wait_time = EntityData.BigHostileBullet.LifeTime
     $LifeTime.start()
-    damage = WaveModifire.Entity_data.BigHostileBullet.Damage
+    damage = EntityData.BigHostileBullet.Damage
 
 
 func _process(delta: float) -> void:
-    velocity = lerp(velocity, Vector2.ZERO, WaveModifire.Entity_data.BigHostileBullet.Damping * delta)
+    velocity = lerp(velocity, Vector2.ZERO, EntityData.BigHostileBullet.Damping * delta)
     move_area(velocity)
 
 
@@ -25,7 +25,7 @@ func move_area(linear_velocity = Vector2.ZERO):
 
 
 func shoot(direction: Vector2, _creation_parent = get_parent()):
-    speed = WaveModifire.Entity_data.BigHostileBullet.Speed
+    speed = EntityData.BigHostileBullet.Speed
     created_by = _creation_parent
     var impulse = Vector2(speed * direction.x, speed * direction.y)
     velocity = impulse
@@ -54,7 +54,7 @@ func _on_TargetDetector_detecting_area(area: Area2D) -> void:
 
 
 func _on_TargetDetector_detecting_body(body: Node) -> void:
-    if created_by != null:
+    if is_instance_valid(created_by):
         if created_by.has_method("heal"):
             created_by.heal()
     

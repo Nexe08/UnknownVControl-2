@@ -1,5 +1,5 @@
 extends Node2D
-#  Main
+# Main
 
 
 func _ready() -> void:

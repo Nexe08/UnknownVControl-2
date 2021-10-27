@@ -1,4 +1,5 @@
 extends Sprite
+# Player Visual Sprite
 
 export (NodePath) var jump_partical_path = ""
 
@@ -14,7 +15,7 @@ onready var fsm = $AnimationTree.get("parameters/playback")
 
 func _process(delta: float) -> void:
     var velocity = parent.velocity
-    var is_grounded = parent.is_on_floor()
+    var is_grounded = parent.is_grounded
     var move_direction = parent.move_direction()
     
     if is_grounded:
