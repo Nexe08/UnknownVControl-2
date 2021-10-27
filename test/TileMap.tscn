@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://test/TileMap.tres" type="TileSet" id=1]
+[ext_resource path="res://test/TileMap.gd" type="Script" id=2]
+
+[sub_resource type="Shader" id=6]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform float speed = 1f;
+uniform float minStrength: hint_range(0f, 1f) = .05;
+uniform float maxStrength: hint_range(0f, 1f) = .01;
+uniform float strengthScale = 100f;
+uniform float interval = 3.5;
+uniform float detail = 1f;
+uniform float distortion: hint_range(0f, 1f);
+uniform float hightOffset: hint_range(0f, 1f);
+
+uniform float offset = 0f;
+
+float getWind(vec2 vertex, vec2 uv, float time) {
+    float diff = pow(maxStrength - minStrength, 2f);
+    float strength = clamp(minStrength + diff + sin(time / interval) * diff, minStrength, maxStrength) * strengthScale;
+    float wind = (sin(time) + cos(time * detail)) * strength * max(0f, (1f-uv.y) - hightOffset);
+    
+    return wind;
+   }
+
+void vertex() {
+    vec4 pos = WORLD_MATRIX * vec4(0f, 0f, 0f, 1f);
+    float time = TIME * speed + offset;
+    VERTEX.x += getWind(VERTEX.xy, UV, time);
+   }
+"
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = SubResource( 6 )
+shader_param/speed = 1.26
+shader_param/minStrength = 0.0
+shader_param/maxStrength = 0.189
+shader_param/strengthScale = 100.0
+shader_param/interval = 3.5
+shader_param/detail = 1.0
+shader_param/distortion = null
+shader_param/hightOffset = 0.707
+shader_param/offset = 0.0
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 320, 16 )
+
+[node name="TileMap" type="TileMap"]
+material = SubResource( 7 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 2
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( 1310723, 0, 0, 1310724, 0, 0, 1310725, 0, 0, 1310726, 0, 0, 1310727, 0, 0, 1310728, 0, 0, 1310729, 0, 0, 1310730, 0, 0, 1310731, 0, 0, 1310732, 0, 0, 1310733, 0, 0, 1310734, 0, 0, 1310735, 0, 0, 1310736, 0, 0, 1310737, 0, 0, 1310738, 0, 0, 1310739, 0, 0 )
+script = ExtResource( 2 )
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2( 304, 352 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource( 5 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

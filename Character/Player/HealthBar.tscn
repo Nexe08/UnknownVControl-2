@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Assate/RoundProgressBar_96x96.png" type="Texture" id=1]
+[ext_resource path="res://Character/Player/Texture/RoundProgressBar_96x96.png" type="Texture" id=1]
 [ext_resource path="res://Character/Player/HealthBar.gd" type="Script" id=2]
 
 [sub_resource type="Animation" id=1]

@@ -1,24 +1,35 @@
 extends RigidBody2D
 # Bullet
 
-export var speed:= 800
-export var damage:= 50
+var speed: float
+var damage: float
+var spread: float
 
 
 func _ready() -> void:
-    Global.Camera.shake(.3, 0.2)
-    ScreenEffect.start_abration(.3, .1)
+    AudioManager.play_bullet_shooting_sfx()
+    ScreenEffect.start_screen_shake(.3, .2)
+    ScreenEffect.start_abration(.15, .1)
 
 
-func shoot(direction):
+func shoot(direction, weapon):
+    speed = weapon.speed
+    damage = weapon.damage
+    spread = weapon.spred
+    
     if direction.x != 0:
-        apply_impulse(Vector2.ZERO, Vector2(speed * direction.x, 0))
+#        apply_impulse(Vector2.ZERO, Vector2(speed * direction.x, 0))
+        apply_impulse(Vector2.ZERO, Vector2(speed * direction.x, rand_range(-spread, spread)))
     
     elif direction.y != 0:
-        apply_impulse(Vector2.ZERO, Vector2(0, speed * direction.y))
+        apply_impulse(Vector2.ZERO, Vector2(rand_range(-spread, spread), speed * direction.y))
 
 
 func self_destruction():
+    var explosition_instance = Global.Bullet_explosition.instance()
+    get_parent().add_child(explosition_instance)
+    explosition_instance.global_position = global_position
+    
     queue_free()
 
 
