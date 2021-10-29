@@ -1,6 +1,0 @@
-
-# called every time wave will change
-func update_difficulty():
-    # Difficulty = InitialDifficulty + Level * DifficultyGradient
-    Entity_data.Bee.Life = abs(round(Entity_data.Bee.Life + current_wave * difficulty_threshold))
-    Entity_data.Spawner.Life = abs(round(Entity_data.Spawner.Life + current_wave * difficulty_threshold))
