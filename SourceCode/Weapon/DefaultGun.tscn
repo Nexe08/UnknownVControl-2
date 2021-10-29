@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Weapon/Weapon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assate/Effect/InExplostion_1.png" type="Texture" id=3]
+[ext_resource path="res://Object/Bullet/Bullet.tscn" type="PackedScene" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_local_to_scene = true
+resource_name = "default"
+length = 0.12
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("MuzzelFlashTexture:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.01, 0.07 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MuzzelFlashTexture:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.06 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 2, 0 ]
+}
+
+[node name="DefaultGun" instance=ExtResource( 1 )]
+speed = 1000.0
+damage = 1.0
+spred = 80.0
+knockback = 62.0
+MAX_AMMO = 50
+current_ammo = 50
+projectile = ExtResource( 4 )
+
+[node name="FireRate" parent="." index="0"]
+wait_time = 0.2
+
+[node name="ReloadTime" parent="." index="1"]
+wait_time = 0.7
+
+[node name="Texture" parent="." index="2"]
+offset = Vector2( 5, 0 )
+
+[node name="MuzzelPosition" parent="." index="3"]
+position = Vector2( 12, 0 )
+
+[node name="MuzzelFlash" parent="." index="4"]
+anims/default = SubResource( 1 )
+
+[node name="MuzzelFlashTexture" type="Sprite" parent="." index="6"]
+position = Vector2( 12, 0 )
+texture = ExtResource( 3 )
+hframes = 3
+vframes = 3

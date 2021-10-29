@@ -1,0 +1,85 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assate/Font/Kenney Future.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Object/Effect/DamagePopupText.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.0980731, 1 ),
+"update": 0,
+"values": [ Vector2( 0.2, 0.2 ), Vector2( 1.2, 1.2 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Label:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 0.153893, 1 ),
+"update": 0,
+"values": [ Vector2( -32.0886, -31.6949 ), Vector2( -31.8409, -65.1413 ) ]
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath(".:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0.795024, -0.25, 0, 0.0844802, -0.62428, 0, -0.191069, 0.218481, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7, 1 )
+}
+
+[node name="DamagePopupText" type="Node2D"]
+modulate = Color( 0.894118, 0.376471, 0.376471, 1 )
+scale = Vector2( 0.2, 0.2 )
+z_index = 10
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -32.0886
+margin_top = -31.6949
+margin_right = 31.9114
+margin_bottom = 32.3051
+rect_min_size = Vector2( 64, 64 )
+rect_pivot_offset = Vector2( 32, 32 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "12"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "default"
+anims/default = SubResource( 2 )
