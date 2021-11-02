@@ -1,0 +1,104 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Assate/BackgroundScene/Cloud.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assate/BackgroundScene/Background.gd" type="Script" id=2]
+[ext_resource path="res://Assate/Cloud_3.png" type="Texture" id=3]
+[ext_resource path="res://Assate/Cloud_2.png" type="Texture" id=4]
+[ext_resource path="res://Assate/Cloud.png" type="Texture" id=5]
+[ext_resource path="res://Assate/BackgroundScene/Sun.tscn" type="PackedScene" id=6]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float blur: hint_range(0f, 5f) = 2f;
+
+void fragment() {
+	vec4 color = textureLod(SCREEN_TEXTURE, SCREEN_UV, blur);
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/blur = 1.789
+
+[node name="Background" type="ViewportContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -32, -16 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sky" type="ColorRect" parent="."]
+anchor_left = 0.156863
+anchor_top = 0.177778
+anchor_right = 0.156863
+anchor_bottom = 0.177778
+margin_left = -192.0
+margin_top = -128.0
+margin_right = 624.0
+margin_bottom = 352.0
+rect_min_size = Vector2( 816, 480 )
+mouse_filter = 2
+input_pass_on_modal_close_click = false
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.988235, 0.87451, 0.803922, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sun" parent="." instance=ExtResource( 6 )]
+position = Vector2( 480, 192 )
+
+[node name="Cloud" type="Node2D" parent="."]
+
+[node name="Cloud" parent="Cloud" instance=ExtResource( 1 )]
+position = Vector2( 141, 91 )
+texture = ExtResource( 5 )
+
+[node name="Cloud2" parent="Cloud" instance=ExtResource( 1 )]
+position = Vector2( 40, 38 )
+texture = ExtResource( 4 )
+
+[node name="Cloud3" parent="Cloud" instance=ExtResource( 1 )]
+position = Vector2( 95, 69 )
+texture = ExtResource( 3 )
+
+[node name="Cloud4" parent="Cloud" instance=ExtResource( 1 )]
+position = Vector2( 254, 95 )
+texture = ExtResource( 5 )
+
+[node name="Cloud5" parent="Cloud" instance=ExtResource( 1 )]
+position = Vector2( 153, 42 )
+texture = ExtResource( 4 )
+
+[node name="Cloud6" parent="Cloud" instance=ExtResource( 1 )]
+position = Vector2( 208, 73 )
+texture = ExtResource( 3 )
+
+[node name="Cloud7" parent="Cloud" instance=ExtResource( 1 )]
+position = Vector2( 342, 173 )
+texture = ExtResource( 5 )
+
+[node name="Cloud8" parent="Cloud" instance=ExtResource( 1 )]
+position = Vector2( 241, 120 )
+texture = ExtResource( 4 )
+
+[node name="Cloud9" parent="Cloud" instance=ExtResource( 1 )]
+position = Vector2( 296, 151 )
+texture = ExtResource( 3 )
+
+[node name="Shader" type="ColorRect" parent="."]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -193.0
+margin_top = -110.0
+margin_right = 215.0
+margin_bottom = 130.0
+rect_min_size = Vector2( 816, 480 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
