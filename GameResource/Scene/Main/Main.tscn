@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scene/Game/Game.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Character/Player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scene/Main/Main.gd" type="Script" id=4]
+[ext_resource path="res://Assate/BackgroundScene/Background.tscn" type="PackedScene" id=5]
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="Background" parent="." instance=ExtResource( 5 )]
+margin_left = 96.0
+margin_top = -32.0
+margin_right = 96.0
+margin_bottom = -32.0
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( -36, 2 )
+z_index = 1
+
+[node name="GameParent" type="Node2D" parent="."]
+__meta__ = {
+"_editor_description_": "Game node will be added as child of this node"
+}
+
+[node name="Game" parent="GameParent" instance=ExtResource( 2 )]

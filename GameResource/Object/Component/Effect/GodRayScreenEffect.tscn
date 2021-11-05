@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assate/shader/god_ray.shader" type="Shader" id=1]
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = ExtResource( 1 )
+shader_param/angle = -0.3
+shader_param/position = -0.2
+shader_param/spread = 0.147
+shader_param/cutoff = 0.1
+shader_param/falloff = 1.0
+shader_param/edge_fade = 0.539
+shader_param/speed = 1.0
+shader_param/ray1_density = 8.0
+shader_param/ray2_density = 30.0
+shader_param/ray2_intencity = 0.3
+shader_param/color = Color( 1, 0.9, 0.65, 0.8 )
+shader_param/hdr = false
+shader_param/seed = 5.0
+
+[node name="GodRayScreenEffect" type="ColorRect"]
+material = SubResource( 10 )
+margin_right = 416.0
+margin_bottom = 240.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

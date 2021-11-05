@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Object/WeaponSelectionArea/WeaponSelectionAreaScript.gd" type="Script" id=1]
+[ext_resource path="res://PickableItem/WeaponDrop.tscn" type="PackedScene" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.172549, 0.772549, 0.964706, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[node name="WeaponSelectionArea" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="SelectionTime" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="LifeTimeBar" type="ProgressBar" parent="."]
+margin_left = -32.0
+margin_top = 13.0
+margin_right = 368.0
+margin_bottom = 53.0
+rect_scale = Vector2( 0.2, 0.2 )
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+value = 50.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SelectiveWeapon" type="Node2D" parent="."]
+
+[node name="1" parent="SelectiveWeapon" instance=ExtResource( 2 )]
+position = Vector2( -32, 0 )
+
+[node name="2" parent="SelectiveWeapon" instance=ExtResource( 2 )]
+
+[node name="3" parent="SelectiveWeapon" instance=ExtResource( 2 )]
+position = Vector2( 32, 0 )
+
+[connection signal="timeout" from="SelectionTime" to="." method="_on_SelectionTime_is_out"]
+[connection signal="weapon_was_choosen" from="SelectiveWeapon/1" to="." method="_on_1_weapon_was_choosen"]
+[connection signal="weapon_was_choosen" from="SelectiveWeapon/2" to="." method="_on_2_weapon_was_choosen"]
+[connection signal="weapon_was_choosen" from="SelectiveWeapon/3" to="." method="_on_3_weapon_was_choosen"]

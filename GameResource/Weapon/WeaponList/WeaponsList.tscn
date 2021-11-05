@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Weapon/LaserBeem.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Weapon/DefaultGun.tscn" type="PackedScene" id=3]
+
+[node name="WeaponsList" type="Node2D"]
+
+[node name="DefaultGun" parent="." instance=ExtResource( 3 )]
+visible = false
+
+[node name="LaserBeem" parent="." instance=ExtResource( 2 )]
+visible = false
