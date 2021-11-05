@@ -1,0 +1,453 @@
+[gd_scene load_steps=35 format=2]
+
+[ext_resource path="res://Character/BigDroply/Texture/BigDroply_animation.png" type="Texture" id=1]
+[ext_resource path="res://Object/Component/HitBox/HitBox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Character/BigDroply/BigDroply.gd" type="Script" id=3]
+[ext_resource path="res://Object/Laser/Laser.tscn" type="PackedScene" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 16 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 16, 16 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 32, 192 )
+
+[sub_resource type="Animation" id=4]
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ true ],
+"method": "set_can_move"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VisualBody/Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 13, 24 ]
+}
+
+[sub_resource type="Animation" id=5]
+loop = true
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "handel_apearing"
+}, {
+"args": [  ],
+"method": "handel_transfer_animation"
+} ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ false ],
+"method": "set_can_move"
+} ]
+}
+
+[sub_resource type="Animation" id=6]
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "handel_transfer_animation"
+} ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ true ],
+"method": "start_laser"
+}, {
+"args": [ false ],
+"method": "start_laser"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "handel_tracking_target"
+}, {
+"args": [  ],
+"method": "handel_tracking_target"
+}, {
+"args": [  ],
+"method": "handel_tracking_target"
+}, {
+"args": [  ],
+"method": "handel_tracking_target"
+}, {
+"args": [  ],
+"method": "handel_tracking_target"
+}, {
+"args": [  ],
+"method": "handel_tracking_target"
+} ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ true ],
+"method": "set_can_move"
+} ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("VisualBody/Sprite:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 25, 36 ]
+}
+
+[sub_resource type="Animation" id=7]
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "self_distruction"
+}, {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+
+[sub_resource type="Animation" id=8]
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ false ],
+"method": "set_can_move"
+} ]
+}
+
+[sub_resource type="Animation" id=9]
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "handel_transfer_animation"
+} ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ false ],
+"method": "set_can_move"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VisualBody/Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 37, 48 ]
+}
+
+[sub_resource type="Animation" id=10]
+loop = true
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "handel_tracking_target"
+}, {
+"args": [  ],
+"method": "handel_tracking_target"
+}, {
+"args": [  ],
+"method": "handel_tracking_target"
+}, {
+"args": [  ],
+"method": "handel_tracking_target"
+}, {
+"args": [  ],
+"method": "handel_tracking_target"
+}, {
+"args": [  ],
+"method": "handel_tracking_target"
+}, {
+"args": [  ],
+"method": "handel_tracking_target"
+}, {
+"args": [  ],
+"method": "handel_tracking_target"
+}, {
+"args": [  ],
+"method": "handel_tracking_target"
+}, {
+"args": [  ],
+"method": "handel_tracking_target"
+}, {
+"args": [  ],
+"method": "handel_tracking_target"
+} ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ true ],
+"method": "set_can_move"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VisualBody/Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 11 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "anticipation"
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "apear"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "attack"
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "death"
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "disapear"
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "recovery"
+
+[sub_resource type="AnimationNodeAnimation" id=17]
+animation = "track_target"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=27]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=28]
+
+[sub_resource type="AnimationNodeStateMachine" id=29]
+states/anticipation/node = SubResource( 11 )
+states/anticipation/position = Vector2( 384, 70 )
+states/apear/node = SubResource( 12 )
+states/apear/position = Vector2( 51, 70 )
+states/attack/node = SubResource( 13 )
+states/attack/position = Vector2( 384, 158 )
+states/death/node = SubResource( 14 )
+states/death/position = Vector2( 384, 336 )
+states/disapear/node = SubResource( 15 )
+states/disapear/position = Vector2( 219, 250 )
+states/recovery/node = SubResource( 16 )
+states/recovery/position = Vector2( 219, 158 )
+states/track_target/node = SubResource( 17 )
+states/track_target/position = Vector2( 219, 70 )
+transitions = [ "apear", "track_target", SubResource( 18 ), "track_target", "anticipation", SubResource( 19 ), "anticipation", "attack", SubResource( 20 ), "attack", "recovery", SubResource( 21 ), "recovery", "disapear", SubResource( 22 ), "recovery", "death", SubResource( 23 ), "disapear", "death", SubResource( 24 ), "recovery", "track_target", SubResource( 25 ), "attack", "death", SubResource( 26 ), "track_target", "death", SubResource( 27 ), "apear", "death", SubResource( 28 ) ]
+start_node = "apear"
+end_node = "death"
+graph_offset = Vector2( -43, 121 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=30]
+
+[node name="BigDroply" type="KinematicBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource( 3 )
+life = 90.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, 16 )
+shape = SubResource( 1 )
+
+[node name="VisualBody" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="VisualBody"]
+texture = ExtResource( 1 )
+offset = Vector2( 0, 24 )
+hframes = 6
+vframes = 9
+frame = 9
+
+[node name="Laser" parent="VisualBody" instance=ExtResource( 4 )]
+position = Vector2( 0, 32 )
+
+[node name="HitBox" parent="." instance=ExtResource( 2 )]
+visible = false
+collision_layer = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2( 0, 16 )
+shape = SubResource( 2 )
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+position = Vector2( 0, 176 )
+shape = SubResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/anticipation = SubResource( 4 )
+anims/apear = SubResource( 5 )
+anims/attack = SubResource( 6 )
+anims/death = SubResource( 7 )
+anims/disapear = SubResource( 8 )
+anims/recovery = SubResource( 9 )
+anims/track_target = SubResource( 10 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 29 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 30 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="PlayerDetectionTimer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_detecting_player"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]
+[connection signal="timeout" from="PlayerDetectionTimer" to="." method="_on_PlayerDetectionTimer_timeout"]
