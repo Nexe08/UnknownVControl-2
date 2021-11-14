@@ -26,7 +26,7 @@ func _on_WeaponSelectionArea_selection_period_ended() -> void:
 
 
 # wave modifire telles the map that all task is
-# completed nad no need to spawn enemy
+# completed and no need to spawn enemy
 # setget method
 # called in wave modifire
 func set_level_clear(value: bool) -> void:

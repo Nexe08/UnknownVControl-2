@@ -5,7 +5,7 @@ extends Area2D
 export (NodePath) var root_scene
 export (PackedScene) var next_map
 
-export (bool) var exit_poral = false
+export (bool) var exit_poral = false # if true then portal will used to leave the application
 
 onready var parent = get_node(root_scene)
 
