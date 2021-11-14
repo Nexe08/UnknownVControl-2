@@ -24,3 +24,9 @@ func _on_Portal_body_entered(_body: Node) -> void:
 func _on_Portal_body_exited(_body: Node) -> void:
     # nothing to do for now
     pass
+
+
+func get_activated():
+    visible = true
+    set_physics_process(true)
+    $CollisionShape2D.call_deferred("set_disabled", false)
