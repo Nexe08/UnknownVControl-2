@@ -10,17 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node2D",
-"class": "MapClass",
-"language": "GDScript",
-"path": "res://Scene/WaveMap/WaveMapClass.gd"
-}, {
-"base": "Node2D",
 "class": "Weapon",
 "language": "GDScript",
 "path": "res://Weapon/Weapon.gd"
 } ]
 _global_script_class_icons={
-"MapClass": "",
 "Weapon": ""
 }
 

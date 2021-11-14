@@ -37,10 +37,6 @@ var BigHostileBullet: PackedScene = preload("res://Object/Bullet/BigHostileBulle
 var HostileBullet: PackedScene = preload("res://Object/Bullet/HostileBullet.tscn")
 
 
-# MAP
-var map_1: PackedScene = preload("res://Scene/WaveMap/Map_1.tscn")
-
-
 # add text that show how mutch damage player gives the entity
 func add_damage_popup_text(_text, _node, _position):
     var damage_popup_text_instance = Damage_popup_text.instance()
