@@ -189,7 +189,6 @@ Spawn_Grub = true
 [node name="Portal" parent="." index="7"]
 position = Vector2( 269, 289 )
 root_scene = NodePath("..")
-next_map = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portal" index="0"]
 position = Vector2( 0, -0.5 )

@@ -29,7 +29,7 @@ var Dead_animation: PackedScene = preload("res://Object/Effect/Explostion_1.tscn
 # ENTITY
 var Big_droply_path: PackedScene = preload("res://Character/BigDroply/BigDroply.tscn")
 
-var Bee_path: PackedScene = preload("res://Character/Bee/Bee.tscn")
+var Bee_path: PackedScene = preload("res://Character/Bee/New/Bee.tscn")
 var grub_path: PackedScene = preload("res://Character/Grub/Grub.tscn")
 
 # PROJECTILE

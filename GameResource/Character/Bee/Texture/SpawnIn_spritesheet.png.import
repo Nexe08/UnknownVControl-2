@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/InExplostion_1.png-c29b484934bcb065bcfa25f3010c7a62.stex"
+path="res://.import/SpawnIn_spritesheet.png-2c4f551055058a46625e4a94ce262b81.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assate/Effect/InExplostion_1.png"
-dest_files=[ "res://.import/InExplostion_1.png-c29b484934bcb065bcfa25f3010c7a62.stex" ]
+source_file="res://Character/Bee/Texture/SpawnIn_spritesheet.png"
+dest_files=[ "res://.import/SpawnIn_spritesheet.png-2c4f551055058a46625e4a94ce262b81.stex" ]
 
 [params]
 
