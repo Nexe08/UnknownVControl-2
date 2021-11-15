@@ -2,8 +2,9 @@
 
 [ext_resource path="res://Weapon/Weapon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Character/Player/Texture/Gun.png" type="Texture" id=2]
-[ext_resource path="res://Assate/Effect/InExplostion_1.png" type="Texture" id=3]
+[ext_resource path="res://Character/Bee/Texture/SpawnIn_spritesheet.png" type="Texture" id=3]
 [ext_resource path="res://Object/Bullet/Bullet.tscn" type="PackedScene" id=4]
+
 
 [sub_resource type="Animation" id=1]
 resource_local_to_scene = true

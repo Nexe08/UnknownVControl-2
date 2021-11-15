@@ -5,7 +5,7 @@
 [ext_resource path="res://Character/Bee/Bee.gd" type="Script" id=3]
 [ext_resource path="res://Object/Component/HitBox/HitBox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Object/Component/HealtBar/HealthBar.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Assate/Effect/InExplostion_1.png" type="Texture" id=6]
+[ext_resource path="res://Character/Bee/Texture/SpawnIn_spritesheet.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 4 )
@@ -361,9 +361,7 @@ shader_param/flash_modifire = 0.0
 [sub_resource type="CircleShape2D" id=21]
 radius = 10.0499
 
-[node name="Bee" type="KinematicBody2D" groups=[
-"Bee",
-]]
+[node name="Bee" type="KinematicBody2D" groups=["Bee"]]
 collision_layer = 512
 script = ExtResource( 3 )
 life = 15.0
