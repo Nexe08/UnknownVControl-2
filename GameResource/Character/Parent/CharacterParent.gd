@@ -9,6 +9,8 @@ var Entity_child
 
 const UP = Vector2.UP
 
+onready var parent = get_parent()
+
 
 func _physics_process(delta: float) -> void:
     if Entity_child:

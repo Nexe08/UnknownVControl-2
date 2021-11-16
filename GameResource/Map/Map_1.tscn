@@ -184,7 +184,6 @@ position = Vector2( 224, 288 )
 
 [node name="EnemySpawnManager" parent="." index="6"]
 Spawn_Bee = true
-Spawn_Grub = true
 
 [node name="Portal" parent="." index="7"]
 position = Vector2( 269, 289 )

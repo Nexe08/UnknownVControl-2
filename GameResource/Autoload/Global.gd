@@ -34,7 +34,7 @@ var grub_path: PackedScene = preload("res://Character/Grub/Grub.tscn")
 
 # PROJECTILE
 var BigHostileBullet: PackedScene = preload("res://Object/Bullet/BigHostileBullet.tscn")
-var HostileBullet: PackedScene = preload("res://Object/Bullet/HostileBullet.tscn")
+var HostileBulletPath: PackedScene = preload("res://Object/Bullet/HostileBullet.tscn")
 
 
 # add text that show how mutch damage player gives the entity

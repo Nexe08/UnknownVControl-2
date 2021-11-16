@@ -32,13 +32,38 @@ func _update(delta: float) -> void:
 
 
 func _follow_target(_delta: float) -> void:
-    var direction = parent.global_position.direction_to(target.global_position)
+    var target_direction = parent.global_position.direction_to(target.global_position)
+    var distance_from_target = parent.global_position.distance_to(target.global_position)
     
-    if self_instance == null:
-        parent.Velocity = lerp(parent.Velocity, speed * direction, 0.17)
-    else:
+    if self_instance == null: # self instance isn't in range
+        
+        if distance_from_target < 32: # KEEP DISTANCE FROM PLAYER
+            parent.Velocity = lerp(parent.Velocity, speed * -target_direction, 0.17)
+            can_attack = false
+        
+        elif distance_from_target > 32 and distance_from_target < 64: # STOP MOVING
+            parent.Velocity = lerp(parent.Velocity, Vector2.ZERO, 0.17)
+            anim.travel("attack")
+            can_attack = true
+        
+        else: # FOLLOW PLAYER
+            parent.Velocity = lerp(parent.Velocity, speed * target_direction, 0.17)
+            can_attack = false
+    
+    else: # KEEP DISTANCE FROM SELF INSTANCE
         var dir = parent.global_position.direction_to(self_instance.global_position)
         parent.Velocity = lerp(parent.Velocity, speed * -dir, 0.17)
+
+
+# called in animation player
+func _attack():
+    var target_direction = parent.global_position.direction_to(target.global_position)
+    
+    var bullet_instance = Global.HostileBulletPath.instance()
+    
+    bullet_instance.global_position = parent.global_position
+    bullet_instance.shoot(target_direction)
+    parent.parent.add_child(bullet_instance)
 
 
 # called in animation player
@@ -51,21 +76,13 @@ func _set_can_move(value: bool) -> void:
     can_move = value
 
 
-func _on_TargetDetector_body_entered(_body: Node) -> void:
-    can_attack = true
-    _set_can_move(false)
-
-
-func _on_TargetDetector_body_exited(_body: Node) -> void:
-    can_attack = false
-    _set_can_move(true)
-
-
+# Self Instance Detection
 func _on_SelfInstanceDetector_area_entered(area: Area2D) -> void:
     if area.is_in_group("Bee"):
         self_instance = area
 
 
+# Self Instance Undetection
 func _on_SelfInstanceDetector_area_exited(area: Area2D) -> void:
     if area.is_in_group("Bee"):
         self_instance = null
