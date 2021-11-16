@@ -359,6 +359,20 @@ tracks/7/keys = {
 "method": "queue_free"
 } ]
 }
+tracks/8/type = "method"
+tracks/8/path = NodePath("../..")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ -1 ],
+"method": "update_enemy_count"
+} ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -625,7 +639,6 @@ shape = SubResource( 25 )
 [node name="DefaultSprite" type="Sprite" parent="BeeClass" index="2"]
 texture = ExtResource( 4 )
 hframes = 2
-frame = 1
 
 [node name="SpawnSprite" type="Sprite" parent="BeeClass" index="3"]
 visible = false
@@ -639,7 +652,6 @@ visible = false
 texture = ExtResource( 6 )
 hframes = 4
 vframes = 3
-frame = 2
 
 [node name="WarningIndicator" type="Sprite" parent="BeeClass" index="5"]
 visible = false

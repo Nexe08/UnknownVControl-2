@@ -3,6 +3,9 @@ extends Node2D
 
 signal can_start_game
 
+onready var enemy_count: int = 0
+onready var kill_count: int = 0
+
 onready var level_clear := false setget set_level_clear, get_level_clear
 onready var portal = $Portal
 
@@ -37,3 +40,15 @@ func set_level_clear(value: bool) -> void:
 
 func get_level_clear() -> bool:
     return level_clear
+
+
+# called in parent character script
+func set_enemy_count(value: int) -> void:
+    enemy_count += value
+    $Label.text = String(enemy_count)
+
+
+# called in parent character script
+func set_kill_count(value: int):
+    
+    pass
