@@ -27,6 +27,7 @@ func _physics_process(delta: float) -> void:
 func set_life(value: float) -> void:
     Life = value
 
+
 func get_life() -> float:
     return Life
 
@@ -35,3 +36,8 @@ func update_enemy_count(value: int) -> void:
     if parent.is_in_group("Map"):
         parent.set_enemy_count(value)
 
+
+# can be called in specific enemy's script or specific enemy's animation player
+func self_distruction():
+    if parent.is_in_group("Map"):
+        parent.set_kill_count(1)

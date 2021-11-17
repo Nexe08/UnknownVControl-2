@@ -167,8 +167,8 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 } ]
 0/z_index = 0
 
-[sub_resource type="RectangleShape2D" id=26]
-extents = Vector2( 10, 19.5 )
+[sub_resource type="CircleShape2D" id=26]
+radius = 12.0
 
 [node name="Map_1" instance=ExtResource( 1 )]
 
@@ -186,9 +186,10 @@ position = Vector2( 224, 288 )
 Spawn_Bee = true
 
 [node name="Portal" parent="." index="7"]
-position = Vector2( 269, 289 )
+visible = false
+position = Vector2( 15, 92 )
 root_scene = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portal" index="0"]
-position = Vector2( 0, -0.5 )
+position = Vector2( 305, 180 )
 shape = SubResource( 26 )

@@ -21,6 +21,10 @@ func _ready() -> void:
     Global.Player.global_position = $PlayerSpawnPosition.global_position
 
 
+# warning-ignore:unused_argument
+func _process(delta: float) -> void:
+    _update_HUD()
+
 
 func _on_WeaponSelectionArea_selection_period_ended() -> void:
     # parent map will not spawn any task for player
@@ -45,10 +49,21 @@ func get_level_clear() -> bool:
 # called in parent character script
 func set_enemy_count(value: int) -> void:
     enemy_count += value
-    $Label.text = String(enemy_count)
 
 
 # called in parent character script
 func set_kill_count(value: int):
-    
+    kill_count += value
     pass
+
+######################################
+#                HUD
+######################################
+
+
+func _update_HUD():
+    var _kill = $HUD/HBoxContainer/KillCount
+    var _enemy = $HUD/HBoxContainer/EnemyCount
+    
+    _kill.text = String(kill_count)
+    _enemy.text = String(enemy_count)

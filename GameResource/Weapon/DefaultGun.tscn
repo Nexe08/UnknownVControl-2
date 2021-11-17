@@ -5,7 +5,6 @@
 [ext_resource path="res://Character/Bee/Texture/SpawnIn_spritesheet.png" type="Texture" id=3]
 [ext_resource path="res://Object/Bullet/Bullet.tscn" type="PackedScene" id=4]
 
-
 [sub_resource type="Animation" id=1]
 resource_local_to_scene = true
 resource_name = "default"
@@ -197,14 +196,13 @@ tracks/2/keys = {
 }
 
 [node name="DefaultGun" instance=ExtResource( 1 )]
-rotation = 0.0
 speed = 1000.0
-damage = 5.0
-spred = 80.0
-refill_speed = 20.0
-knockback = 62.0
-MAX_AMMO = 50
-current_ammo = 50
+damage = 8.0
+spred = 50.0
+refill_speed = 50.0
+knockback = 32.0
+MAX_AMMO = 40
+current_ammo = 40
 projectile = ExtResource( 4 )
 
 [node name="FireRate" parent="." index="0"]
@@ -216,7 +214,6 @@ wait_time = 0.7
 [node name="Texture" parent="." index="2"]
 texture = ExtResource( 2 )
 offset = Vector2( 5, 0 )
-flip_v = false
 
 [node name="MuzzelPosition" parent="." index="3"]
 position = Vector2( 12, 0 )

@@ -8,9 +8,11 @@
     * Add ssh key in ssh agent = `ssh-add 'Key Name'`
 
 # TODO
+*17/Nov/2021*
+* *Need to Modify* Bee's attack need to be initialy slow.
+
 *16/Nov/2021*
-* *BUG* Bee collision is still colliding with enemy bullet.
-* *UPADTE* Spawn enmeys in Diffrent Node to track enemy count in map. 
+* *BUG* Bee collision is still colliding with enemy bullet while playing death animation.
 
 *14/Nov/2021*
 * Enemy Parent Scene. (*Started*: 14/Nov/2021, 16/Nov/2021 :*Last Update*)

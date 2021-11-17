@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Map/Parent/MapParentScript.gd" type="Script" id=1]
 [ext_resource path="res://Object/BoundingArea/BoundingArea.tscn" type="PackedScene" id=2]
@@ -7,9 +7,16 @@
 [ext_resource path="res://Object/Portal/Portal.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Object/WeaponSelectionArea/WeaponSelectionArea.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Object/EnemySpawnManager/EnemySpawnManager.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assate/Font/Kenney Blocks.ttf" type="DynamicFontData" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 320, 10 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 8
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 8 )
 
 [node name="MapParentScene" type="Node2D" groups=["Map"]]
 script = ExtResource( 1 )
@@ -56,15 +63,77 @@ position = Vector2( 304, 224 )
 
 [node name="Portal" parent="." instance=ExtResource( 5 )]
 
-[node name="Label" type="Label" parent="."]
-margin_left = 262.0
-margin_top = 89.0
-margin_right = 302.0
-margin_bottom = 103.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "00"
+[node name="HUD" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 612, 360 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -76.0
+margin_bottom = 360.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_pivot_offset = Vector2( 76, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KillText" type="Label" parent="HUD/HBoxContainer"]
+margin_top = 348.0
+margin_right = 62.0
+margin_bottom = 360.0
+size_flags_horizontal = 3
+size_flags_vertical = 8
+custom_colors/font_color = Color( 0.384314, 1, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Totle Kill :"
+
+[node name="KillCount" type="Label" parent="HUD/HBoxContainer"]
+margin_left = 66.0
+margin_top = 348.0
+margin_right = 78.0
+margin_bottom = 360.0
+size_flags_horizontal = 3
+size_flags_vertical = 8
+custom_colors/font_color = Color( 0.384314, 1, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "00"
+
+[node name="Margin" type="Label" parent="HUD/HBoxContainer"]
+margin_left = 82.0
+margin_top = 348.0
+margin_right = 86.0
+margin_bottom = 360.0
+size_flags_vertical = 8
+custom_colors/font_color = Color( 0.384314, 1, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "  "
+
+[node name="EnemyText" type="Label" parent="HUD/HBoxContainer"]
+margin_left = 90.0
+margin_top = 348.0
+margin_right = 162.0
+margin_bottom = 360.0
+size_flags_horizontal = 3
+size_flags_vertical = 8
+custom_colors/font_color = Color( 0.384314, 1, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Totle Enemy : "
+
+[node name="EnemyCount" type="Label" parent="HUD/HBoxContainer"]
+margin_left = 166.0
+margin_top = 348.0
+margin_right = 178.0
+margin_bottom = 360.0
+size_flags_horizontal = 3
+size_flags_vertical = 8
+custom_colors/font_color = Color( 0.384314, 1, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "00"
 
 [connection signal="selection_period_ended" from="WeaponSelectionArea" to="." method="_on_WeaponSelectionArea_selection_period_ended"]
