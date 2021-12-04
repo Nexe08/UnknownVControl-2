@@ -235,3 +235,6 @@ exit_poral = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Exit" index="0"]
 position = Vector2( 306, 181 )
 shape = SubResource( 27 )
+
+[node name="HUD" parent="." index="11"]
+visible = false

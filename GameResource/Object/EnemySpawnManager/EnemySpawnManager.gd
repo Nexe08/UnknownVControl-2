@@ -16,12 +16,18 @@ func _ready() -> void:
     parent.connect("can_start_game", self, "_set_can_spawn")
 
 
-func _set_can_spawn():
-    if Spawn_Bee:
-        $BeeSpawningTimeout.start()
-    
-    if Spawn_Grub:
-        $GrubSpawningTimeout.start()
+func _set_can_spawn(value: bool) -> void:
+    if value == true:
+        if Spawn_Bee:
+            $BeeSpawningTimeout.start()
+        
+        if Spawn_Grub:
+            $GrubSpawningTimeout.start()
+    else:
+        var timers = get_children()
+        for timer in timers:
+            if timer.is_class("Timer"):
+                timer.stop()
 
 
 func _on_BeeSpawningTimeout_timeout() -> void:
