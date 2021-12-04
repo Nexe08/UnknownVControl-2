@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Weapon/Weapon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Object/Laser/LaserBeemProjectile.tscn" type="PackedScene" id=2]
@@ -10,28 +10,192 @@ resource_name = "default"
 length = 0.12
 step = 0.01
 
+[sub_resource type="Animation" id=2]
+resource_local_to_scene = true
+resource_name = "down"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Texture:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Texture:flip_v")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_local_to_scene = true
+resource_name = "left"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Texture:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Texture:flip_v")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 180.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_local_to_scene = true
+resource_name = "right"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Texture:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Texture:flip_v")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_local_to_scene = true
+resource_name = "up"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Texture:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Texture:flip_v")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
+
 [node name="LaserBeem" instance=ExtResource( 1 )]
-rotation = 0.0
-damage = 5.0
-refill_speed = 10.0
+damage = 10.0
+refill_speed = 30.0
 knockback = 90.0
-MAX_AMMO = 4
-current_ammo = 4
+MAX_AMMO = 6
+current_ammo = 6
 projectile = ExtResource( 2 )
 
 [node name="FireRate" parent="." index="0"]
 wait_time = 0.5
 
 [node name="ReloadTime" parent="." index="1"]
-wait_time = 2.0
+wait_time = 0.8
 
 [node name="Texture" parent="." index="2"]
 texture = ExtResource( 3 )
 offset = Vector2( 6, 0 )
-flip_v = false
 
 [node name="MuzzelPosition" parent="." index="3"]
 position = Vector2( 14, 0 )
 
 [node name="MuzzelFlash" parent="." index="4"]
 anims/default = SubResource( 1 )
+
+[node name="AnimationPlayer" parent="." index="5"]
+anims/down = SubResource( 2 )
+anims/left = SubResource( 3 )
+anims/right = SubResource( 4 )
+anims/up = SubResource( 5 )
