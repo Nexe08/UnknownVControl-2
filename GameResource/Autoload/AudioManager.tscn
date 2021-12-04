@@ -14,26 +14,22 @@ script = ExtResource( 2 )
 
 [node name="_1" type="AudioStreamPlayer" parent="SFX/BulletShooting"]
 stream = ExtResource( 1 )
+pitch_scale = 0.89
 
 [node name="_2" type="AudioStreamPlayer" parent="SFX/BulletShooting"]
 stream = ExtResource( 1 )
-pitch_scale = 0.96
+pitch_scale = 0.93
 
 [node name="_3" type="AudioStreamPlayer" parent="SFX/BulletShooting"]
 stream = ExtResource( 1 )
-pitch_scale = 1.15
 
 [node name="_4" type="AudioStreamPlayer" parent="SFX/BulletShooting"]
 stream = ExtResource( 1 )
-pitch_scale = 1.02
+pitch_scale = 1.03
 
 [node name="_5" type="AudioStreamPlayer" parent="SFX/BulletShooting"]
 stream = ExtResource( 1 )
-pitch_scale = 1.08
-
-[node name="_6" type="AudioStreamPlayer" parent="SFX/BulletShooting"]
-stream = ExtResource( 1 )
-pitch_scale = 1.26
+pitch_scale = 1.1
 
 [node name="PlayerWalk" type="Node2D" parent="SFX"]
 
