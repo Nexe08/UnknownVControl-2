@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/BigHostileBulletSprite.png-f9af2b30cdeb7033f5e448ea3a4d964f.stex"
+path="res://.import/warining_indicator_spritesheet.png-72f901509a72247bc1152fa1cf4bcf5e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assate/BigHostileBulletSprite.png"
-dest_files=[ "res://.import/BigHostileBulletSprite.png-f9af2b30cdeb7033f5e448ea3a4d964f.stex" ]
+source_file="res://Assate/warining_indicator_spritesheet.png"
+dest_files=[ "res://.import/warining_indicator_spritesheet.png-72f901509a72247bc1152fa1cf4bcf5e.stex" ]
 
 [params]
 

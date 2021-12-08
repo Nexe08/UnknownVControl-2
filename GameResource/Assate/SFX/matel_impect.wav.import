@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Jump.wav-1ac7cac27b478b9fee4d73f0a0eaf283.sample"
+path="res://.import/matel_impect.wav-dfc010c8c40fc39ffd59ba92d4c9b099.sample"
 
 [deps]
 
-source_file="res://Assate/SFX/Jump.wav"
-dest_files=[ "res://.import/Jump.wav-1ac7cac27b478b9fee4d73f0a0eaf283.sample" ]
+source_file="res://Assate/SFX/matel_impect.wav"
+dest_files=[ "res://.import/matel_impect.wav-dfc010c8c40fc39ffd59ba92d4c9b099.sample" ]
 
 [params]
 
